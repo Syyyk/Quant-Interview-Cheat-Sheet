@@ -166,12 +166,25 @@ $dS_t = \alpha S_t dt + \sigma S_t dW_t$,
 $d \log S_t = (\alpha -\frac{1}{2}\sigma^2)dt+\sigma dW_t$.
 
 Girsanov Thm. 
-定义$Z(t)=\exp\left(-\int_0^t \Theta(u)dW(u)-\frac12 \int_0^t \Theta(u)^2 d\right)$
-作为Radon-Nikodym导数得到$\tilde{\mathbb{P}}(A)=\int_A Z(\omega)d\mathbb{P}(\omega)$.
-则$\tilde{W}(t)=W(t)+\int_0^t\Theta(u)du$在$\tilde{\mathbb{P}}$下是BM.
+定义$Z(t)=\exp\left(-\int_0^t \Theta(u)dW(u)-\frac12 \int_0^t \Theta(u)^2 d\right)$,
+$\widetilde{W}(t)=W(t)+\int_0^t\Theta(u)du$,
+并假设$\Theta(u)Z(u)$平方可积.
+令$Z=Z(T)$, 则$\mathbb{E}Z=1$,
+且$Z$作为Radon-Nikodym导数, 即$\widetilde{\mathbb{P}}(A)=\int_A Z(\omega)d\mathbb{P}(\omega)$定义的
+$\widetilde{\mathbb{P}}$下, $\widetilde{W}(t)$是BM.
 
-在$\Theta(t)=\frac{\alpha(t)-R(t)}{\sigma(t)}$定义的$\tilde{\mathbb{P}},\tilde{W}$下,
-$dS(t)=R(t)S(t)+\sigma(t)S(t)d\tilde{W}(t)$贴现后是鞅.
+在$\Theta(t)=\frac{\alpha(t)-R(t)}{\sigma(t)}$定义的$\widetilde{\mathbb{P}},\widetilde{W}$下,
+$dS(t)=R(t)S(t)dt+\sigma(t)S(t)d\widetilde{W}(t)$, 贴现后
+$dS^*(t)=\sigma(t) S^*(t) d\widetilde{W}(t)$是鞅.
+
+Martingale Representation Thm.
+$M(t)$是平方可积鞅, 则存在适应的平方可积过程$\theta(t)$使得$M(t)$ a.s.有积分表示
+$M(t)=\mathbb{E}[M_0]+\int_0^t \theta(s) dW(s)$.
+
+贴现后的 deriv value process $V^*(t)$ 是鞅, 由鞅表示定理有$\theta(t)$使
+$V^*(T)=\widetilde{\mathbb{E}}V_0 + \int_0^T \theta(t) d\widetilde{W}(t)$
+$=\widetilde{\mathbb{E}}V_0 + \int_0^T \frac{\theta(t)}{\sigma(t)S^*(t)} dS^*(t)$,
+即为复制策略.
 
 \subsection{Stochastic Differential Equation}
 
@@ -245,8 +258,8 @@ $y$对$x$做一元回归, 回归系数$\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$
 \subsection{Pricing}
 
 Binomial Model.
-风险中性概率 $\tilde{p} = \frac{1+r-d}{u-d}$, $\tilde{q} = \frac{u-1-r}{u-d}$.
-$V_n(\omega)=\frac{1}{1+r}[\tilde{p}V_{n+1}(\omega H) + \tilde{q}V_{n+1}(\omega T)]$.
+风险中性概率 $\widetilde{p} = \frac{1+r-d}{u-d}$, $\widetilde{q} = \frac{u-1-r}{u-d}$.
+$V_n(\omega)=\frac{1}{1+r}[\widetilde{p}V_{n+1}(\omega H) + \widetilde{q}V_{n+1}(\omega T)]$.
 $\Delta_n(\omega) = \frac{V_{n+1}(\omega H)-V_{n+1}(\omega T)}{S_{n+1}(\omega H)-S_{n+1}(\omega T)}$.
 
 
