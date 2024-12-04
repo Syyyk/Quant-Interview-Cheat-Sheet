@@ -539,6 +539,18 @@ $\sigma_1\geq \cdots \geq \sigma_r>0$为$A$的所有奇异值,即$\sigma_1^2,\cd
 \end{itemize}
 
 
+\subsection{计算}
+
+$A$是实对称阵, 求非异矩阵$C$使得$C'AC$是对角阵: 
+作$n\times 2n$矩阵$(A, I_n)$, 实施初等行变换, 并对左侧矩阵实施对应初等列变换,
+将左侧化为对角阵. 此时右侧矩阵的即为$C'$.
+
+
+$A$是实对称阵, 求正交矩阵$P$使得$P'AP$是对角阵: 
+求特征值, 对每个特征值$\lambda$, 求解$(\lambda I-A)x=0$得到基础解系.
+若基础解系有多个向量, 进行正交化.
+所有列向量单位化后拼接得到$P$.
+
 \section{Calculus}
 
 \subsection{一元微积分}
