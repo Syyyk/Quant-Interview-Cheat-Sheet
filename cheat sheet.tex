@@ -11,6 +11,7 @@
 \setstretch{1.25} 
 \usepackage{float}
 \usepackage{bookmark}
+
 \begin{document}
 
 \section{Probability and Stochastic Process}
@@ -52,7 +53,8 @@ For vec-valued rv $\mathbf{X}$, $\varphi_X(\mathbf{t})=\mathbb{E}[e^{i \langle \
 
 定义: Random vec $X$是$d$维Gaussian Vec 若对任意$t\in\mathbb{R}^d$, $\langle t,X \rangle $都是Gaussian.
 
-Note that $n$个正态分布拼起来不一定是Gaussian vec, 但$n$个独立正态分布拼起来一定是.
+Note that $n$个正态分布拼起来不一定是Gaussian vec, 但$n$个独立正态分布拼起来一定是(独立正态分布的和一定是正态分布).
+反例: $X\sim\mathcal{N}(0,1), Y=\varepsilon X$ where $\varepsilon=\pm 1$各一半概率且与$X$独立. $X+Y$不是正态. 
 
 给定vec $\mu$和半正定对称阵$\Sigma$, 存在Gaussian Vector $X$ with mean $\mu$ and Cov $\Sigma$.
 如果$\Sigma$是满秩的, 则存在density
@@ -94,7 +96,8 @@ where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$.
 		      \frac{2 \sigma}{\sqrt{2 \pi}} \exp \left\{-\frac{\mu^{2}}{2 \sigma^{2}}\right\}$.
 	      其中$\Phi$为std norm CDF.
 
-	\item 在$[0,1]$的均匀分布下取$n$个值, 最大值的期望是$\frac{n}{n+1}$.
+	\item 在$[0,1]$的均匀分布下取$n$个值, 最大值的期望是$\frac{n}{n+1}$, 最大值的密度
+	      $f_X(x) = n(1-x)^{n-1}$.
 
 	\item Distribution of $X+Y$ when $X\sim f,Y\sim g$ are independent:
 	      $\mathbb{P} (X+Y\leq z)=\int\mathbb{P}(x\leq z-y)g(y)f(y)dy$,
@@ -256,7 +259,7 @@ t检验统计量$t_{\hat{\beta_j}} = \hat{\beta_j}/se(\hat{\beta_j})$.
 $y$对$x$做一元回归, 回归系数$\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$. 回归$R^2$的分布$\sim Beta(\frac{k-1}{2},\frac{n-k}{2})$. $Beta(\alpha,\beta)$的期望为$\frac{1}{1+\beta/\alpha}$.
 
 
-\section{Options}
+\section{Finance}
 
 \subsection{Pricing}
 
@@ -266,7 +269,8 @@ $V_n(\omega)=\frac{1}{1+r}[\widetilde{p}V_{n+1}(\omega H) + \widetilde{q}V_{n+1}
 $\Delta_n(\omega) = \frac{V_{n+1}(\omega H)-V_{n+1}(\omega T)}{S_{n+1}(\omega H)-S_{n+1}(\omega T)}$.
 
 
-Put option value wrt Strike price 应该是凸的.
+Option value wrt strike price is convex (consider the payoff of fly).
+Option value wrt vol is usually (but not always) convex (see Volga expression).
 
 当total variance $\sigma^2 T$较小, ATM put 价值有近似 $P_{ATM}\simeq 0.4\sigma S_0\sqrt{T}$.
 ATM Call 和 Put 都有$\Delta\simeq 0.5$.
@@ -407,6 +411,9 @@ Risk reversal: Buy downside put, partially funded by selling an upside call, or 
 看跌期权价值=内在+波动率-利率+股利. 因此美式看跌若提前行权, 要距离除息日足够远, 且波动率价值较小.
 无论看涨看跌, 越是实值, 美式与欧式价格差越大; 波动率越小, 美式与欧式价格差越大.
 
+TODO: 为什么 no dividend 情况下 Am Call 不会 early exercise?
+
+
 
 \noindent \textbf{结构化} \par
 Down and out + Down and in = Vanilla Call.
@@ -417,6 +424,16 @@ Knock-out: Immediate termination of structure.
 
 雪球是什么: FCN-KI autocallable (fixed coupon note kick-in variant)
 
+\noindent \textbf{Bond} \par
+久期$D=-\frac{1}{B}\frac{\partial B}{\partial y}$, 其中$B$为债券价格, $y$为收益率. 刻画了债券价格关于收益率的敏感度: $\Delta B\simeq -DB\Delta y$.
+
+Zero Coupon Bond的久期等于它的maturity.
+
+\noindent \textbf{VaR} \par
+
+$N$ day $C\%$ VaR has $VaR(N,C)\simeq \sigma_v z_C \sqrt{\frac{N}{252}}V(0)$,
+where $C$ is the confidence level, $\sigma_v$ is the annualized std of return, $z_C$ is the z-score i,e, $\mathbb{P}(Z\leq z_C)=C$ for std norm $Z$.
+$V(0)$ is the current value of portfolio.
 
 \section{Linear Algebra}
 
@@ -771,6 +788,13 @@ $\frac{\partial a^T xx^T b}{\partial x}=ab^Tx+ba^Tx$.
 $\frac{\partial a^T X b}{\partial X}=ab^T$,
 $\frac{\partial a^T XX^T b}{\partial X}=ab^TX+ba^TX$.
 
+\subsection{采样}
 
+均匀采正态: Box-Muller变换. $U_1, U_2$是独立的$[0, 1]$均匀分布,
+则$Z_0=\sqrt{-2\ln U_1}\cos(2\pi U_2)$, $Z_1=\sqrt{-2\ln U_1}\sin(2\pi U_2)$
+是标准正态分布随机变量.
+
+TODO: 接受-拒绝采样
+Perhaps Metropolis-Hastings algo
 
 \end{document}
