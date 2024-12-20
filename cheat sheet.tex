@@ -221,13 +221,14 @@ $\left\{\begin{array}{l}
 则$g_t+\beta g_x+\frac12 \gamma^2 g_{xx}=0$.
 
 \section{OLS}
-$y=X\beta+\varepsilon$, G-M假设 $\text{Cov}(e)=\sigma ^2 I_n$.
+$y=X\beta+\varepsilon$, G-M假设 $\text{Cov}(\varepsilon)=\sigma ^2 I_n$.
 
 估计$\hat{\beta}=(X^TX)^{-1}X^Ty$.
 满足$\mathbb{E}[\hat{\beta}]=\beta, \operatorname{Var}(\hat{\beta})=\sigma^2(X^TX)^{-1}$.
+是正态分布.
 是BLUE最佳线性无偏估计.
 
-$X$已知非随机, $y$已知随机, $\beta$未知非随机, $\hat{\beta}$随机, $e$未知随机($\sigma^2$ 未知).
+$X$已知非随机, $y$已知随机, $\beta$未知非随机, $\hat{\beta}$随机, $\varepsilon$未知随机($\sigma^2$ 未知).
 每个$y_i$都有一个对应的总体$N(\beta^T x_i, \sigma^2)$
 
 记$H=X(X^TX)^{-1}X^T$,有$\hat{y}=Hy$. $H$对称幂等,$HX=X$,迹为$k+1$.
@@ -236,8 +237,11 @@ $\mathbb{E}[\hat{y}]=y, \operatorname{Var}(\hat{y})=\sigma^2H$.
 残差$e=y-\hat{y}$(注意区别于误差向量$\varepsilon$)有
 $\mathbb{E}[e]=0, \operatorname{Var}(e)=\sigma^2 (I-H)$.
 
-$SSR = \sum (\hat{y_i}-\bar{y})^2, SSE = \sum (\hat{y_i}-y_i)^2, SST = \sum (y_i-\bar{y})^2$.
+$ESS = SSR = \sum (\hat{y_i}-\bar{y})^2, df=p-1$.
+$RSS = SSE = \sum (\hat{y_i}-y_i)^2, df=n-p$.
+$SST = \sum (y_i-\bar{y})^2$.
 有$SST=SSE+SSR$.定义$R^2=1-SSR/SST$.
+(ESS: explained, SSE: error, SSR: regression, RSS: residual).
 
 $\operatorname{Var}(\hat{\beta_j}) = \frac{\sigma^2}{SST_j(1-R_j^2)}$,
 其中$SST_j=\sum_i (x_{ij}-\bar{x_j})^2$, $R_j^2$为$x_j$关于其他自变量含截距回归的$R^2$.
