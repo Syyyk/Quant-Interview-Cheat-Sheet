@@ -63,6 +63,8 @@ $f(\mathbf{x}) = (2 \pi)^{-d / 2} \operatorname{det}(\boldsymbol{\Sigma})^{-1 / 
 MGF  $\exp \left( \mu^T t + \frac{1}{2} t^T \Sigma t \right)$.
 ChF $\exp \left( i \mu^T t - \frac{1}{2} t^T \Sigma t \right)$.
 
+\noindent \textbf{条件概率条件期望}
+
 条件概率: $\mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}$.
 贝叶斯公式: $\mathbb{P}(A|B) = \mathbb{P}(B|A) \frac{\mathbb{P}(A)}{\mathbb{P}(B)}$.
 
@@ -277,7 +279,6 @@ Option value wrt strike price is convex (consider the payoff of fly).
 Option value wrt vol is usually (but not always) convex (see Volga expression).
 
 当total variance $\sigma^2 T$较小, ATM put 价值有近似 $P_{ATM}\simeq 0.4\sigma S_0\sqrt{T}$.
-ATM Call 和 Put 都有$\Delta\simeq 0.5$.
 
 Put-Call Parity $C(t)-P(t) = S(t) - Ke^{-r(T-t)}$.
 
@@ -293,10 +294,11 @@ $d_2=\frac{\ln \left(S_0 / K\right)+\left(r-\sigma^2 / 2\right) T}{\sigma \sqrt{
 
 
 \subsection{Greeks}
-Delta: 标的资产价格变化引起的期权价格变化.
-Gamma: 标的资产价格变化引起的Delta值变化.
-Vega: 隐含波动率变化引起的期权价格变化.
-Theta: 期权的时间价值随时间流逝损耗的速度.
+Delta: 关于Spot一阶导.
+Gamma: 关于Spot二阶导.
+Vega: 关于Vol一阶导.
+Theta: 关于t一阶导.
+Rho: 关于利率一阶导.
 
 \noindent \textbf{Delta \& Gamma} \par
 \begin{itemize}
@@ -354,31 +356,26 @@ Theta: 期权的时间价值随时间流逝损耗的速度.
 
 \noindent \textbf{对称策略} \par
 
-以下默认期权多头. 价指Strike Price.
+跨式期权 Straddle: Long 100 C + Long 100 P (\textbackslash /).
+Long Gamma, Long Vega, Short Theta.
 
-跨式期权 Straddle: Long 同价的Call+Put.
-\textbackslash / 形.
-Neutral Delta, Long Gamma, Long Vega, Short Theta.
+宽跨式期权 Strangle: Long 105 C + Long 95 P (\textbackslash \_ / ).
+Long Gamma, Long Vega, Short Theta.
 
-宽跨式期权 Strangle: Long 高价Call + 低价Put.
-\textbackslash \_ / 形.
-Neutral Delta, Long Gamma, Long Vega, Short Theta.
+蝶式期权 Fly: Long 95 C + Long 105 C + Short 2 * 100 C (\_ / \textbackslash \_).
+Short Gamma, Short Vega, Long Theta.
 
-蝶式期权 Fly: Long 低价Call + 高价Call, Short 2 中间价Call.
-\_ / \textbackslash \_ 形.
-Neutral Delta, Short Gamma, Short Vega, Long Theta.
-
-鹰式期权 Iron Condor: Long 低价Call + 高价Call, Short 中低价Call+中高价Call.
-\_ / - \textbackslash \_ 形.
-Neutral Delta, Short Gamma, Short Vega, Long Theta.
+鹰式期权 Iron Condor: Long 95 C + Long 105 C + Short 97.5 C + Short 102.5 C (\_ / - \textbackslash \_).
+Short Gamma, Short Vega, Long Theta.
 
 \noindent \textbf{时间价差} \par
-时间价差多头: 买入长期期权, 卖出短期期权.(因为长期期权通常更贵)
+
+时间价差: 买入长期期权, 卖出短期期权(长期期权通常更贵).
 使用平值期权1:1构成Delta中性.
 
-时间价差多头是Short Gamma的, 因为若标的价格不变, 随时间流逝, 短期期权价值减少是多于长期期权的.
+Short Gamma, 因为若标的价格不变, 随时间流逝, 短期期权价值减少是多于长期期权的.
 
-时间价差多头是Long Vega的, 因为波动率变化(上升)对长期期权有更大影响(增加更多时间价值).
+Long Vega, 因为波动率变化(上升)对长期期权有更大影响(增加更多时间价值).
 
 \begin{figure}[H]
 	\centering
@@ -390,9 +387,11 @@ Neutral Delta, Short Gamma, Short Vega, Long Theta.
 当隐含波动率很低但被认为会升高时, 时间价差多头可能获利.
 
 \noindent \textbf{垂直价差} \par
+
 买入与卖出相同类型、同时到期、行权价格不同的期权.
-牛市价差 Call Spread: 买低, 卖高. (Call:牛市看涨, Put:牛市看跌).
-熊市价差 Put Spread: 卖低, 买高. (Call:熊市看涨, Put:熊市看跌).
+
+Call Spread: Buy 105 C + Sell 110 C.
+Put Spread: Buy 95 P + Sell 90 P.
 
 买低卖高, 无论是Call还是Put都具有牛市特征, 即具有正的Delta值.
 两个行权价之间差距越大, 牛市特征越明显(价差的Delta越大).
@@ -413,22 +412,32 @@ Risk reversal: Buy downside put, partially funded by selling an upside call, or 
 \noindent \textbf{美式期权} \par
 看涨期权价值=内在+波动率+利率-股利. 因此美式看涨若提前行权, 只可能在股利支付前一天.
 看跌期权价值=内在+波动率-利率+股利. 因此美式看跌若提前行权, 要距离除息日足够远, 且波动率价值较小.
+
+严格说明在 no dividend 情况下 Am Call 不会 early exercise:
+考虑欧式期权Put-Call Parity, 有 $C_{eu} = P_{eu} + S - Ke^{-r(T-t)} > P + S - K > S - K$,
+从而 $C_{am} \geq C_{eu}>S-K$.
+
 无论看涨看跌, 越是实值, 美式与欧式价格差越大; 波动率越小, 美式与欧式价格差越大.
 
-TODO: 为什么 no dividend 情况下 Am Call 不会 early exercise?
+美式期权没有Put Call Parity, 没有显式定价公式(Perpetual American Option有).
 
 
 
-\noindent \textbf{结构化} \par
+\noindent \textbf{Exotic} \par
 Down and out + Down and in = Vanilla Call.
 
 Knock-in: Structure is activated after being knocked in (before that coupon is protected).
 
 Knock-out: Immediate termination of structure.
 
-雪球是什么: FCN-KI autocallable (fixed coupon note kick-in variant)
+Autocall Hedging: 
+The Vega of autocall peaks somewhere between KI and spot, with vega at KI only about 20\% peak vega.
+When peak vega is hit, need to hedge skew exposure (sell vol around peak vega and buy vol around KI).
+Spot near KO, hedge with buying tight call spreads (digital payoff).
+Spot near KI, buy back all hedges.
 
-\noindent \textbf{Bond} \par
+
+\noindent \textbf{Bond and Rates} \par
 久期$D=-\frac{1}{B}\frac{\partial B}{\partial y}$, 其中$B$为债券价格, $y$为收益率. 刻画了债券价格关于收益率的敏感度: $\Delta B\simeq -DB\Delta y$.
 
 Zero Coupon Bond的久期等于它的maturity.
