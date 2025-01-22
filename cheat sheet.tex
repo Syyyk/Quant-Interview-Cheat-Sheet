@@ -53,7 +53,7 @@ For vec-valued rv $\mathbf{X}$, $\varphi_X(\mathbf{t})=\mathbb{E}[e^{i \langle \
 
 定义: Random vec $X$是$d$维Gaussian Vec 若对任意$t\in\mathbb{R}^d$, $\langle t,X \rangle $都是Gaussian.
 
-Note that $n$个正态分布拼起来不一定是Gaussian vec, 但$n$个独立正态分布拼起来一定是(独立正态分布的和一定是正态分布).
+$n$个正态分布拼起来不一定是Gaussian vec, 但$n$个独立正态分布拼起来一定是(独立正态分布的和一定是正态分布).
 反例: $X\sim\mathcal{N}(0,1), Y=\varepsilon X$ where $\varepsilon=\pm 1$各一半概率且与$X$独立. $X+Y$不是正态. 
 
 给定vec $\mu$和半正定对称阵$\Sigma$, 存在Gaussian Vector $X$ with mean $\mu$ and Cov $\Sigma$.
@@ -409,6 +409,7 @@ Risk reversal: Buy downside put, partially funded by selling an upside call, or 
 
 
 \subsection{其他}
+
 \noindent \textbf{美式期权} \par
 看涨期权价值=内在+波动率+利率-股利. 因此美式看涨若提前行权, 只可能在股利支付前一天.
 看跌期权价值=内在+波动率-利率+股利. 因此美式看跌若提前行权, 要距离除息日足够远, 且波动率价值较小.
@@ -420,7 +421,6 @@ Risk reversal: Buy downside put, partially funded by selling an upside call, or 
 无论看涨看跌, 越是实值, 美式与欧式价格差越大; 波动率越小, 美式与欧式价格差越大.
 
 美式期权没有Put Call Parity, 没有显式定价公式(Perpetual American Option有).
-
 
 
 \noindent \textbf{Exotic} \par
@@ -438,9 +438,19 @@ Spot near KI, buy back all hedges.
 
 
 \noindent \textbf{Bond and Rates} \par
+
+$n$年零息利率 spot rate / zero rate: 此时投入本金, 所有利息与本金都在$n$年后支付的收益率.
+
+平价收益率(par yield): 债券每期支付券息$c$, 所有现金流(每期的$c$与到期的本金加$c$)用零息利率贴现等于债券面值(100).
+
+若$d$为到期时\$ 1贴现值, $A$为年金(annuity, 每个券息日付\$ 1)现金流贴现值, $m$为每年付息次数, 则$100=A\frac{c}{m}+100d$.
+
+债券收益率$y$: 所有现金流用$y$进行贴现, 现值等于债券市场价格.
+
 久期$D=-\frac{1}{B}\frac{\partial B}{\partial y}$, 其中$B$为债券价格, $y$为收益率. 刻画了债券价格关于收益率的敏感度: $\Delta B\simeq -DB\Delta y$.
 
 Zero Coupon Bond的久期等于它的maturity.
+
 
 \noindent \textbf{VaR} \par
 
@@ -807,7 +817,12 @@ $\frac{\partial a^T XX^T b}{\partial X}=ab^TX+ba^TX$.
 则$Z_0=\sqrt{-2\ln U_1}\cos(2\pi U_2)$, $Z_1=\sqrt{-2\ln U_1}\sin(2\pi U_2)$
 是标准正态分布随机变量.
 
-TODO: 接受-拒绝采样
-Perhaps Metropolis-Hastings algo
+Acceptance-Rejection Sampling.
+由给定pdf $f(x)$, 产生服从该分部的样本.
+需要建议分布$G$ (pdf $g(y)$ 已知, 通常用均匀/正态)产生候选样本.
+计算$c$为满足$cg(x)\geq f(x)$的最小值.
+从$G$抽样出样本$Y$, 从均匀分布$U(0,1)$抽样出样本$U$.
+如果$U\leq\frac{f(Y)}{cg(Y)}$则接受$Y$, 否则拒绝.
+
 
 \end{document}
