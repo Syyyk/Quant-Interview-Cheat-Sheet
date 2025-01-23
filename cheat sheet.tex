@@ -11,6 +11,7 @@
 \setstretch{1.25} 
 \usepackage{float}
 \usepackage{bookmark}
+\newtheorem{thm}{定理}[section]
 
 \begin{document}
 
@@ -443,7 +444,7 @@ $n$年零息利率 spot rate / zero rate: 此时投入本金, 所有利息与本
 
 平价收益率(par yield): 债券每期支付券息$c$, 所有现金流(每期的$c$与到期的本金加$c$)用零息利率贴现等于债券面值(100).
 
-若$d$为到期时\$ 1贴现值, $A$为年金(annuity, 每个券息日付\$ 1)现金流贴现值, $m$为每年付息次数, 则$100=A\frac{c}{m}+100d$.
+若$d$为到期时\$1贴现值, $A$为年金(annuity, 每个券息日付\$1)现金流贴现值, $m$为每年付息次数, 则$100=A\frac{c}{m}+100d$.
 
 债券收益率$y$: 所有现金流用$y$进行贴现, 现值等于债券市场价格.
 
@@ -618,8 +619,105 @@ $A$是实对称阵, 求正交矩阵$P$使得$P'AP$是对角阵:
 \section{Calculus}
 
 \subsection{一元微积分}
-Please see 数分2 notes attached.
 
+\noindent \textbf{等价量代换}. 
+在$x\to0$时, $(1+ax)^b\sim 1+abx,$
+$\cos x\sim 1-\frac{1}{2}x^2,$
+$\ln(1+x)\sim e^x-1\sim\sin x\sim\tan x
+\sim\arcsin x\sim\arctan x\sim x,$
+$\log_a(1+x)\sim \frac{x}{\ln a},a^x-1\sim x\ln a,$
+$x-\sin x\sim \frac{1}{6}x^3,x-\tan x\sim -\frac{1}{3}x^3,
+\tan x-\sin x\sim \frac{1}{2}x^3$.
+
+\noindent \textbf{基本函数导数表}\\
+$(4)  (\tan x)^{\prime}=\sec ^{2} x $\qquad $ (\cot x)^{\prime}=-\csc ^{2} x $\\
+$(5)(\sec x)^{\prime}=\tan x \sec x $\qquad $ (\csc x)^{\prime}=-\cot x \csc x $\\
+$(6)(\arcsin x)^{\prime}=\frac{1}{\sqrt{1-x^{2}}}$
+\qquad $(\arccos x)^{\prime}=-\frac{1}{\sqrt{1-x^{2}}}, x \in(-1,1) $\\
+$(7)(\arctan x)^{\prime}=\frac{1}{1+x^{2}} $
+\qquad $(\operatorname{arccot} x)^{\prime}=-\frac{1}{1+x^{2}} $\\ 
+$(8)(\ln x)^{\prime}=\frac{1}{x}$;一般地$\left(\log _{a} x\right)^{\prime}=\frac{1}{x \ln a}$\\
+$(9)\left(e^{x}\right)^{\prime}=e^{x}$;一般地$\left(a^{x}\right)^{\prime}=a^{x} \ln a$\\
+
+
+\noindent \textbf{常见的高阶导数}
+$$\left(x^{k}\right)^{(n)}=k(k-1) \cdots(k-n+1) x^{k-n} \quad(n \leq k)$$
+$$\left(\mathrm{e}^{x}\right)^{(n)}=\mathrm{e}^{x} ;\left(a^{x}\right)^{(n)}=a^{x}(\ln a)^{n}$$
+$$(\ln x)^{(n)}=(-1)^{n-1}(n-1) ! x^{-n}$$
+$$(\sin x)^{(n)}=\sin \left(x+\frac{n \pi}{2}\right),
+(\cos x)^{(n)}=\cos \left(x+\frac{n \pi}{2}\right)$$
+
+
+\noindent \textbf{常见函数在x=0的Taylor展开}
+$$(1) e^x=1+x+\frac{1}{2!}x^{2}+\frac{1}{3!}x^{3}+\cdots+\frac{1}{n!}x^{n}+o(x^{n})$$
+$$(2) \cos x=1-\frac{1}{2!}x^{2}+\frac{1}{4!}x^{4}+\cdots+\frac{(-1)^{k}}{(2k)!}x^{2k}+o(x^{2k+1})$$
+$$(3) \sin x=x-\frac{1}{3!}x^{3}+\frac{1}{5!}x^{5}+\cdots+\frac{(-1)^{k-1}}{(2k-1)!}x^{2k-1}+o(x^{2k})$$
+$$(4) \frac{1}{1-x}=1+x+x^{2}+x^{3}+\cdots+x^{n}+o(x^{n})$$
+$$(5) \ln(1+x)=x-\frac{1}{2}x^{2}+\frac{1}{3}x^{3}-\frac{1}{4}x^{4}+
+\cdots+(-1)^n\frac{1}{n+1}x^{n+1}+o(x^{n+1})$$
+$$(6)(1+x)^{a}=1+a x+\frac{a(a-1)}{2!} x^2 +\cdots+
+\frac{a(a-1) \cdots(a-n+1)}{n !} x^{n}+o(x^{n})$$
+
+
+\noindent \textbf{含根式函数积分使用的变量代换}\par 
+(1)含有$\sqrt[n]{\frac{ax+b}{cx+d}}$的积分,令$t=\sqrt[n]{\frac{a x+b}{c x+d}}$;\par 
+(2.1)含有$\sqrt{x^{2}+a^{2}}$的积分,令$x=a \tan t$或$x=a \cot t$;\par 
+(2.2)含有$\sqrt{x^{2}-a^{2}}$的积分,令$x=a \sec t$或$x=a \csc t$;\par 
+(2.3)含有$\sqrt{a^{2}-x^{2}}$的积分,令$x=a \sin t$或$x=a \cos t$;\\
+
+\noindent \textbf{分部积分法}
+$$\begin{aligned}
+	\int u(x) v^{\prime}(x) \mathrm{d} x=& \int u(x) \mathrm{d} v(x)=u(x) v(x)-\int v(x) \mathrm{d} u(x) \\
+	&=u v-\int v(x) u^{\prime}(x) \mathrm{d} x
+\end{aligned}$$
+\par 按照$u$在左,$v$在右的次序:反对幂指三\\
+
+\noindent \textbf{有理函数不定积分}\par
+化为简单分式的和,系数用Taylor展开法或特殊赋值法确定
+$$\frac{A}{(x-a)^{k}}, \quad \frac{A x+B}{\left((x-a)^{2}+b^{2}\right)^{k}}$$
+
+其中
+$$\int \frac{A x+B}{\left((x-a)^{2}+b^{2}\right)^{k}} \mathrm{~d} x 
+= \int \frac{A(x-a)}{\left((x-a)^{2}+b^{2}\right)^{k}} \mathrm{~d} x+\int \frac{B+a A}{\left((x-a)^{2}+b^{2}\right)^{k}} \mathrm{~d} x $$
+$$\int \frac{1}{\left((x-a)^{2}+b^{2}\right)^{k}} \mathrm{~d} x \stackrel{t=\frac{x-a}{b}}{=} \frac{1}{b^{2 k-1}} \int \frac{1}{\left(t^{2}+1\right)^{k}} \mathrm{~d} t$$\\
+\par 当$k=2$时$\int \frac{1}{\left(x^{2}+1\right)^{2}} \mathrm{~d} x=\frac{\arctan(x)}{2}+\frac{x}{2+2x^2}+C$\\
+
+\noindent \textbf{三角有理函数积分}$\int R(\sin x, \cos x) dx$\par 
+(1) $R(-\sin x, \cos x)=-R(\sin x, \cos x)$,令 $t=\cos x $\par 
+(2) $R(\sin x,-\cos x)=-R(\sin x, \cos x)$,令 $t=\sin x $\par 
+(3) $R(-\sin x,-\cos x)=R(\sin x, \cos x)$,令$t=\tan x$\\
+
+\noindent \textbf{常用函数积分表}\\
+$(5)  \int\tan x \mathrm{~d} x=-\ln |\cos x|+C,\int\cot x \mathrm{~d} x=\ln |\sin x|+C $\\
+$(6)  \int\csc x\mathrm{~d}x=\ln|\csc x-\cot x|+C,\int\sec x \mathrm{~d} x=\ln |\sec x+\tan x|+C $\\
+$(7)  \int e^{x} \mathrm{~d} x=e^{x}+C, \quad \int a^{x} \mathrm{~d} x=\frac{1}{\ln a} a^{x}+C $\\
+$(8)  \int \frac{1}{\sqrt{a^2-x^{2}}} \mathrm{~d} x=\arcsin\frac{x}{a}+C $\\
+$(9)  \int \frac{1}{\sqrt{x^{2}\pm a^{2}}} \mathrm{~d} x=\ln \left|x+\sqrt{x^{2}\pm a^{2}}\right|+C$\\
+$(10) \int \frac{1}{a^2+x^{2}} \mathrm{~d} x=\frac{1}{a}\arctan\frac{x}{a}+C $\\
+$(11) \int \frac{1}{a^2-x^2}\mathrm{~d}x=\frac{1}{2a}\ln|\frac{a+x}{a-x}|+C $\\
+$(12) \int \sin ^{2} x \mathrm{~d} x=\frac{1}{2}(x-\sin x \cos x)+C ,\int \cos ^{2} x \mathrm{~d} x=\frac{1}{2}(x+\sin x \cos x)+C$\\
+$(13) \int \tan^2(x)\mathrm{~d} x=\tan x-x+C,\int\cot^2(x)\mathrm{~d} x=-\cot x-x+C$ \\
+$(14) \int \ln x \mathrm{~d} x= x \ln x -x +C$
+
+
+\begin{thm}[Holder不等式]
+	$f(x),g(x)$在$[a,b]$连续,$p,q>1$且$\frac{1}{p}+\frac{1}{q}=1$,则
+	$$\int_{a}^{b}|f(x)g(x)|\mathrm{d}x\leq
+	\left(\int_{a}^{b}|f(x)|^{p} \mathrm{~d} x\right)^{\frac{1}{p}}
+	\left(\int_{a}^{b}|g(x)|^{q} \mathrm{~d} x\right)^{\frac{1}{q}}$$
+\end{thm}
+
+\begin{thm}[Stirling公式]
+	$$n!\sim \sqrt[]{2\pi n}\left(\frac{n}{e}\right)^n (n\to\infty )$$
+\end{thm}
+
+\begin{thm}[Viete公式]
+	$$\prod_{n=1}^{\infty} \cos (\frac{x}{2^n})=\frac{\sin x}{x} $$
+\end{thm}
+
+\begin{thm}[Wallis公式]
+	$$\prod_{n=1}^{\infty} (1-\frac{1}{(2n)^2})=\frac{2}{\pi } $$
+\end{thm}
 
 \subsection{多元微分}
 
@@ -637,25 +735,6 @@ Hessian矩阵正定的极值点是极小值点, 负定是极大值点.
 对多元函数$F(x_1,\dots,x_n,y)=0$, 在周围闭矩形连续且有连续偏导, $F_y\neq 0$, 有$\frac{\partial y}{\partial x_i}=-\frac{F_{x_i}}{F_y}$.
 多元向量值函数$F(x_0,y_0,u_0,v_0)=0, G(x_0,y_0,u_0,v_0)=0$, Jacobi行列式$\frac{\partial(F,G)}{\partial(u,v)}\neq 0$,
 则有$\begin{pmatrix} u_x & u_y \\ v_x  & v_y \end{pmatrix} = -\frac{\partial(F,G)}{\partial(u,v)} ^{-1}\frac{\partial(F,G)}{\partial(x,y)}$.
-
-
-\noindent \textbf{几何应用}
-
-\noindent 1.曲线$\Gamma: x=x(t),y=y(t),z=z(t)$,
-在$P_0(x_0,y_0,z_0)$处切向量$\vec{\tau}=(x',y',z')\mid _{P_0}$,
-法平面为$x'(x-x_0)+y'(y-y_0)+z'(z-z_0)= 0$.\par
-~\\
-\noindent 2.曲线$\Gamma: \left\{\begin{array}{l}
-		F(x, y, z)=0 \\ G(x, y, z)=0\end{array}\right.$,
-在$P_0(x_0,y_0,z_0)$处切向量$\vec{\tau}=(\frac{\partial (F,G)}{\partial (y,z)},
-	\frac{\partial (F,G)}{\partial (z,x)}, \frac{\partial (F,G)}{\partial (x,y)})
-	\mid _{P_0}$,法平面为$\operatorname{grad}F(P_0),\operatorname{grad}G(P_0)$张成的平面.\par
-~\\
-\noindent 3.曲面$F(x,y,z)=0$在$P_0(x_0,y_0,z_0)$处法向量$\vec{n}=(F_x,F_y,F_z)\mid _{P_0}$,
-切平面为$\frac{x-x_0}{F_x(P_0)}=\frac{y-y_0}{F_y(P_0)}=\frac{z-z_0}{F_z(P_0)}$.\par
-~\\
-\noindent 4.曲面$x=x(u,v),y=y(u,v),z=z(u,v)$,法向量$\vec{n}=(
-	\frac{\partial (y,z)}{\partial (u,v)},\frac{\partial (z,x)}{\partial (u,v)},\frac{\partial (x,y)}{\partial (u,v)})$.
 
 
 \subsection{重积分}
@@ -688,7 +767,47 @@ n重球坐标变换$x_{1}=r \cos \varphi_{1}, x_{2}=r \sin \varphi_{1} \cos \var
 $\sin ^{n-3} \varphi_{2} \cdots \sin \varphi_{n-2} $.
 
 \subsection{曲线与曲面积分}
-Please see 数分3 notes attached.
+
+\noindent \textbf{GGS公式} \par 
+\noindent Green公式\par 
+$D$为平面上分段光滑闭曲线围成的单连通闭区域且$P,Q$在$D$上有连续偏导,则$\int _{\partial D}P\mathrm{d}x+Q\mathrm{d}y=\iint_D (Q_x-P_y)\mathrm{d}x\mathrm{d}y$.
+其中边界方向定义为,沿着该方向时区域始终在边界左侧.\par 
+~\\
+\noindent Gauss公式\par 
+$\Omega$为空间中分片光滑闭曲面围成的二维单连通闭区域且$P,Q,R$在$\Omega $上有连续偏导,
+则$\iint _{\partial \Omega}P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}z\mathrm{d}x+R\mathrm{d}x\mathrm{d}y=
+\iiint_{\Omega} (P_x+Q_y+R_z)\mathrm{d}x\mathrm{d}y\mathrm{d}z$.其中$\partial \Omega$定向外侧. \par 
+~\\
+\noindent Stokes公式\par 
+$\Sigma $为光滑曲面,边界为分段光滑闭曲线且$P,Q,R$在$\Sigma$与$\partial \Sigma$上有连续偏导,则
+$\int _{\partial \Sigma}P\mathrm{d}x+Q\mathrm{d}y+R\mathrm{d}z=
+\iint_{\Sigma} (R_y-Q_z)\mathrm{d}y\mathrm{d}z+(P_z-R_x)\mathrm{d}z\mathrm{d}x+(Q_x-P_y)\mathrm{d}x\mathrm{d}y$.
+其中$\partial \Sigma$方向定义为,与曲面选定一侧的法向量呈右手关系. \par
+~\\
+\noindent 注.\quad (1)需要连续偏导,不可导点要单独处理.需要闭合,不闭合可以补成闭合.需要连通,环状区域可写成两个连通区域的差.\par 
+(2)由Green公式,若$Q_x=P_y$,则$\int _L P \mathrm{d}x+Q \mathrm{d}y$与路径无关.\par
+(3)Stokes公式右侧可写成
+$\begin{vmatrix}\mathrm{d}y\mathrm{d}z&\mathrm{d}z\mathrm{d}x&\mathrm{d}x\mathrm{d}y\\\partial/\partial x&\partial/\partial y&\partial/\partial z\\P&Q&R\end{vmatrix}$或
+$\begin{vmatrix}\cos\alpha &\cos\beta &\cos\gamma \\\partial/\partial x&\partial/\partial y&\partial/\partial z
+\\P&Q&R \end{vmatrix}dS$.\par 
+
+\noindent \textbf{Euler积分}\par 
+\noindent Beta 函数 $B(p,q)=\int _0^1 x^{p-1}(1-x)^{q-1}\mathrm{d}x$\par 
+在定义域$(0,+\infty)\times(0,+\infty)$连续.$B(p,q)=B(q,p)$.递推公式$B(p,q)=\frac{q-1}{p+q-1}B(p,q-1)$.\par 
+其他表示:令$x=\cos ^2\varphi$,则$B(p, q)=2 \int_{0}^{\pi / 2} \cos ^{2p-1} \varphi \sin ^{2q-1}\varphi \mathrm{d} \varphi$.
+令$x=\frac{1}{1+t}$,则$B(p,q)=\int_0^1 \frac{t^{p-1}+t^{q-1}}{(1+t)^{p+q}}$.\par 
+
+\noindent Gamma函数$\Gamma(s)=\int _0^{+\infty}x^{s-1}e^{-x}\mathrm{d}x$ \par 
+在定义域$s>0$连续且$n$阶可导,$\Gamma^{(n)}(s)=\int _0^{+\infty}x^{s-1}e^{-x}(\ln x)^n\mathrm{d}x$.\par 
+递推公式$\Gamma (s+1)=s\Gamma(s)$.\par 
+其他表示:令$x=t^2$,则$\Gamma(s)=2\int _0^{+\infty}t^{2s-1}e^{-t^2}\mathrm{d}t$.
+
+\noindent 相关公式\par 
+(1)$B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}$\par 
+(2)Legendre公式\quad $\Gamma(s)\Gamma(s+\frac{1}{2})=\frac{\sqrt{\pi}}{2^{2s-1}}\Gamma(2s)$\par 
+(3)余元公式\quad $\Gamma(s)\Gamma(1-s)=\frac{\pi}{\sin (\pi s)}$\par 
+(4)一些取值\quad $B(\frac{1}{2},\frac{1}{2})=\pi$\quad $\Gamma(n+1)=n!$\quad $\Gamma(\frac{1}{2})=\sqrt{\pi }$
+
 
 \section{常微}
 
