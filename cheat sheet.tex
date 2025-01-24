@@ -36,19 +36,16 @@ $\operatorname{Corr}(X,Y)=\frac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Var
 For vec-valued rv $\mathbf{X}$, $M_X(\mathbf{t})=\mathbb{E}[e^{\langle \mathbf{t},\mathbf{X} \rangle }]$.
 可以生成$n$阶矩 $\mathbb{E}[X^n]=\frac{d^n}{dt^n}M_X \Big| _{t=0}$. 矩母函数相同说明分布相同.
 
-
 特征函数 Ch.f.: For rv $X$, $\varphi_X(t)=\mathbb{E} [\exp(itX)]$.
 For vec-valued rv $\mathbf{X}$, $\varphi_X(\mathbf{t})=\mathbb{E}[e^{i \langle \mathbf{t},\mathbf{X} \rangle }]$.
 
-\noindent \textbf{一些分布}
-\begin{itemize}
+\noindent \textbf{一些分布} \par 
+Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. 期望$np$, Var $np(1-p)$. \par 
+Poisson$(\lambda)$: $P_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. 期望$\lambda$, Var $\lambda$.\par 
+Normal$(\mu, \sigma^2)$: $f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$. 
+偏度为0, 峰度为3. MGF: $\exp (\frac12 u^2 t)$.\par 
+Exponential$(\lambda)$: $f_X(x) = \lambda e^{-\lambda x}(x\geq 0)$. 期望$\frac{1}{\lambda}$, Var $\frac{1}{\lambda^2}$.
 
-	\item Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. 期望$np$, Var $np(1-p)$.
-	\item Poisson$(\lambda)$: $P_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. 期望$\lambda$, Var $\lambda$.
-	\item Normal$(\mu, \sigma^2)$: $f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$. 偏度为0, 峰度为3. MGF: $\exp (\frac12 u^2 t)$.
-	\item Exponential$(\lambda)$: $f_X(x) = \lambda e^{-\lambda x}(x\geq 0)$. 期望$\frac{1}{\lambda}$, Var $\frac{1}{\lambda^2}$.
-
-\end{itemize}
 
 \noindent \textbf{Multivariate Gaussian} $\mathcal{N}(\mu,\Sigma)$
 
@@ -84,7 +81,7 @@ $h(y) = \frac{\int g(x)f_{X,Y}(x,y)dx}{\int f_{X,Y}(x,y)dx}$.
 $h(y)=\mathbb{E}[\varphi(X,y)]$.
 更一般地, $X_1,\dots,X_k$是$\mathcal{G}$可测的, $Y_1,\dots,Y_l$独立于$\mathcal{G}$,
 则$\mathbb{E}[f(X_1,\dots,X_k,Y_1,\dots,Y_l)|\mathcal{G}]=g(x_1,\dots,x_k)$
-where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$.
+where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$. \\
 
 \noindent \textbf{一些命题}
 \begin{itemize}
@@ -138,16 +135,15 @@ Rk. 一致可积u.i.即$\forall \varepsilon, \exists K$ s.t. $\mathbb{E}[|X_n|1_
 对连续mtg, 一致可积$\Leftrightarrow$ convergence in $L^1$  $\Leftrightarrow$ $\exists Y\in L^1, X(t)=\mathbb{E}[Y|\mathcal{F}(t)]$.
 
 
-\noindent \textbf{Brownian Motion 性质}
-\begin{itemize}
-	\item Scaling invariance: $\frac{1}{a} B(a^2t)$是BM. 可得first passage time $T_a=a^2 T_1$ in distr.
-	\item Time inversion: $X(t)=tB(\frac{1}{t})(t>0),X(0)=0$是BM. 可得 $\lim_{t\to\infty}\frac{B(t)}{t}=0$ a.s.
-	\item Reflection Principle: $T$是停时, $B_t1_{t\leq T}+(2B_T-B_t)1_{t>T}$是BM.
-	\item $B(t), B(t)^2-t$是鞅. 指数鞅 $X(t)=\exp(\lambda B(t)-\frac12 \lambda^2 t)$对$\lambda\in\mathbb{R}$.
-	\item Arcsine law: $L=\sup \{t\in[0,1]:B(t)=0\}$ is distributed as $\mathbb{P}(L\leq x)=\frac{2}{\pi}\arcsin\sqrt{x}$.
-	\item Wald's Lemma: 停时$T$有$\mathbb{E}T <\infty$, 则$\mathbb{E}[B(T)]=0$, $\mathbb{E}[B(T)^2]=\mathbb{E}T$.
-	\item Law of the Iterated Logarithm: $\limsup _{t \rightarrow \infty} \frac{B(t)}{\sqrt{2 t \log \log (t)}}=1$ a.s.
-\end{itemize}
+\noindent \textbf{Brownian Motion 性质} \par
+Scaling invariance: $\frac{1}{a} B(a^2t)$是BM. 可得first passage time $T_a=a^2 T_1$ in distr. \par
+Time inversion: $X(t)=tB(\frac{1}{t})(t>0),X(0)=0$是BM. 可得 $\lim_{t\to\infty}\frac{B(t)}{t}=0$ a.s. \par
+Reflection Principle: $T$是停时, $B_t1_{t\leq T}+(2B_T-B_t)1_{t>T}$是BM. \par
+$B(t), B(t)^2-t$是鞅. 指数鞅 $X(t)=\exp(\lambda B(t)-\frac12 \lambda^2 t)$对$\lambda\in\mathbb{R}$. \par
+Arcsine law: $L=\sup \{t\in[0,1]:B(t)=0\}$ is distributed as $\mathbb{P}(L\leq x)=\frac{2}{\pi}\arcsin\sqrt{x}$. \par
+Wald's Lemma: 停时$T$有$\mathbb{E}T <\infty$, 则$\mathbb{E}[B(T)]=0$, $\mathbb{E}[B(T)^2]=\mathbb{E}T$. \par
+Law of the Iterated Logarithm: $\limsup _{t \rightarrow \infty} \frac{B(t)}{\sqrt{2 t \log \log (t)}}=1$ a.s. \par
+
 
 
 \noindent \textbf{Stochastic Calculus}
@@ -620,13 +616,12 @@ $A$是实对称阵, 求正交矩阵$P$使得$P'AP$是对角阵:
 
 \subsection{一元}
 
-\noindent \textbf{等价量代换}  在$x\to0$时, \\
+\noindent \textbf{等价量代换}  \quad 在$x\to0$时, \\
 $(1+ax)^b\sim 1+abx,$
 $\cos x\sim 1-\frac{1}{2}x^2$, 
 $x-\sin x\sim \frac{1}{6}x^3,x-\tan x\sim -\frac{1}{3}x^3,
 \tan x-\sin x\sim \frac{1}{2}x^3$, \\
-$\log_a(1+x)\sim \frac{x}{\ln a},a^x-1\sim x\ln a$.\\
-
+$\log_a(1+x)\sim \frac{x}{\ln a},a^x-1\sim x\ln a$.
 
 
 \noindent \textbf{常用导数}\\
@@ -636,7 +631,7 @@ $(\arcsin x)^{\prime}=\frac{1}{\sqrt{1-x^{2}}}$
 \qquad $(\arccos x)^{\prime}=-\frac{1}{\sqrt{1-x^{2}}}, x \in(-1,1) $\\
 $(\arctan x)^{\prime}=\frac{1}{1+x^{2}} $
 \qquad $(\operatorname{arccot} x)^{\prime}=-\frac{1}{1+x^{2}} $\\ 
-$\left(\log _{a} x\right)^{\prime}=\frac{1}{x \ln a}$\qquad $\left(a^{x}\right)^{\prime}=a^{x} \ln a$\\
+$\left(\log _{a} x\right)^{\prime}=\frac{1}{x \ln a}$\qquad $\left(a^{x}\right)^{\prime}=a^{x} \ln a$
 
 
 \noindent \textbf{常用高阶导数}\\
@@ -644,11 +639,13 @@ $\left(x^{k}\right)^{(n)}=k(k-1) \cdots(k-n+1) x^{k-n} \quad(n \leq k)$,\\
 $\left(a^{x}\right)^{(n)}=a^{x}(\ln a)^{n}$,
 $(\ln x)^{(n)}=(-1)^{n-1}(n-1) ! x^{-n}$, \\
 $(\sin x)^{(n)}=\sin \left(x+\frac{n \pi}{2}\right),
-(\cos x)^{(n)}=\cos \left(x+\frac{n \pi}{2}\right)$ \\
+(\cos x)^{(n)}=\cos \left(x+\frac{n \pi}{2}\right)$
+
 
 \noindent \textbf{分部积分法}
 $\int u(x) v^{\prime}(x) \mathrm{d} x= u(x) v(x)-\int v(x) \mathrm{d} u(x) =u v-\int v(x) u^{\prime}(x) \mathrm{d} x$
-\par 按照$u$在左,$v$在右的次序:反对幂指三\\
+\par 按照$u$在左,$v$在右的次序:反对幂指三
+
 
 \noindent \textbf{常用变量代换}\par 
 含有$\sqrt[n]{\frac{ax+b}{cx+d}}$的积分,令$t=\sqrt[n]{\frac{a x+b}{c x+d}}$;\par 
@@ -658,7 +655,7 @@ $\int u(x) v^{\prime}(x) \mathrm{d} x= u(x) v(x)-\int v(x) \mathrm{d} u(x) =u v-
 三角有理函数积分 $\int R(\sin x, \cos x) dx$\par 
 $R(-\sin x, \cos x)=-R(\sin x, \cos x)$,令 $t=\cos x $\par 
 $R(\sin x,-\cos x)=-R(\sin x, \cos x)$,令 $t=\sin x $\par 
-$R(-\sin x,-\cos x)=R(\sin x, \cos x)$,令$t=\tan x$\\
+$R(-\sin x,-\cos x)=R(\sin x, \cos x)$,令$t=\tan x$
 
 
 \noindent \textbf{常用积分}\\
@@ -867,7 +864,7 @@ $\|A\|_{1}=\max _{1 \leqslant j \leqslant n}\left\{\sum_{i=1}^{n}\left|a_{i j}\r
 
 
 \subsection{矩阵求导}
-关于$t$求导与积分:对矩阵每个元素求导与积分.
+关于$t$求导与积分: 对矩阵每个元素求导与积分.
 
 $\frac{d}{dt}[A(t)B(t)]=A'(t)B(t)+A(t)B'(t)$.
 
