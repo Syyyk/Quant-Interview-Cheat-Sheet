@@ -889,9 +889,11 @@ $\frac{\partial a^T XX^T b}{\partial X}=ab^TX+ba^TX$.
 则$Z_0=\sqrt{-2\ln U_1}\cos(2\pi U_2)$, $Z_1=\sqrt{-2\ln U_1}\sin(2\pi U_2)$
 是标准正态分布随机变量.
 
+逆变换采样: $[0,1]$均匀分布取$u$, 目标分布CDF为$F$, $F^{-1}(u)$可采样出目标分布.
+
 Acceptance-Rejection Sampling.
 由给定pdf $f(x)$, 产生服从该分部的样本.
-需要建议分布$G$ (pdf $g(y)$ 已知, 通常用均匀/正态)产生候选样本.
+需要建议分布$G$ (pdf $g(y)$ 已知, 通常用均匀/正态, 选哪个取决于定义域)产生候选样本.
 计算$c$为满足$cg(x)\geq f(x)$的最小值.
 从$G$抽样出样本$Y$, 从均匀分布$U(0,1)$抽样出样本$U$.
 如果$U\leq\frac{f(Y)}{cg(Y)}$则接受$Y$, 否则拒绝.
