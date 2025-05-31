@@ -714,6 +714,11 @@ $f(x) = f(a) + Df(a) (x-a) + \frac12 (x-a)^T D^2f(a) (x-a)$,
 多元向量值函数$F(x_0,y_0,u_0,v_0)=0, G(x_0,y_0,u_0,v_0)=0$, Jacobi行列式$\frac{\partial(F,G)}{\partial(u,v)}\neq 0$,
 则有$\begin{pmatrix} u_x & u_y \\ v_x  & v_y \end{pmatrix} = -\frac{\partial(F,G)}{\partial(u,v)} ^{-1}\frac{\partial(F,G)}{\partial(x,y)}$.
 
+Lagrange 乘数法: 目标函数$f(x_1,\cdots,x_n)$, 约束条件$g_i(x_1,\cdots,x_n),i=1:m$. $f,g_i$ 有连续偏导且 $g$ Jacobi 矩阵满秩.
+构造 Lagrange 函数
+$L(x_1,\cdots,x_n,\lambda_1,\cdots,\lambda_m)=f(x_1,\cdots,x_n)-\sum_{i=1}^m \lambda_i g_i(x_1,\cdots,x_n)$
+则条件极值点一定为 $\frac{\partial L}{\partial x_k}=0, g_l=0 (k=1:n, l=1:m)$ 的解对应的 $x$ 中.
+若 $(\frac{\partial ^2 L}{\partial x_k \partial x_l})_{n\times n}$ 正定, 为条件极小值点. 若负定, 为条件极大值点.
 
 \noindent \textbf{重积分}
 
