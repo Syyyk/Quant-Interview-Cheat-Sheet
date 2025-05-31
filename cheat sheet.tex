@@ -86,25 +86,28 @@ where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$. \\
 \noindent \textbf{一些命题}
 \begin{itemize}
 
-	\item $F$递增+右连续+$[0,1]$,即可定义一个分布函数.
-	      如果存在非负$f$使$F(t)=\int_{-\infty}^t f(x)dx$, 则分布有density.
+\item $F$递增+右连续+$[0,1]$,即可定义一个分布函数.
+	如果存在非负$f$使$F(t)=\int_{-\infty}^t f(x)dx$, 则分布有density.
 
-	\item $X$有pdf $f_X$, $Y=g(X)$其中$g$可微且严格单调, 则$f_Y(y)=f_X(g^{-1}(y))\frac{d}{dy}g^{-1}(y)$.
+\item $X$有pdf $f_X$, $Y=g(X)$其中$g$可微且严格单调, 则$f_Y(y)=f_X(g^{-1}(y))\frac{d}{dy}g^{-1}(y)$.
 
-	\item $X\sim \mathcal{N}(\mu,\sigma^2)$,
-	      则$\mathbb{E}[|X|]=\mu\left[2 \Phi\left(\frac{\mu}{\sigma}\right)-1\right]+
-		      \frac{2 \sigma}{\sqrt{2 \pi}} \exp \left\{-\frac{\mu^{2}}{2 \sigma^{2}}\right\}$.
-	      其中$\Phi$为std norm CDF.
+\item $X_1\sim \mathcal{N}(\mu_1,\sigma_1^2), X_2\sim \mathcal{N}(\mu_2,\sigma_2^2)$ 独立, 
+	则$X_1+X_2\sim X_1\sim \mathcal{N}(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2), $
 
-	\item 在$[0,1]$的均匀分布下取$n$个值, 最大值的期望是$\frac{n}{n+1}$, 最大值的密度
-	      $f_X(x) = n(1-x)^{n-1}$.
+\item $X\sim \mathcal{N}(\mu,\sigma^2)$,
+	则$\mathbb{E}[|X|]=\mu\left[2 \Phi\left(\frac{\mu}{\sigma}\right)-1\right]+
+		\frac{2 \sigma}{\sqrt{2 \pi}} \exp \left\{-\frac{\mu^{2}}{2 \sigma^{2}}\right\}$.
+	其中$\Phi$为std norm CDF.
 
-	\item Distribution of $X+Y$ when $X\sim f,Y\sim g$ are independent:
-	      $\mathbb{P} (X+Y\leq z)=\int\mathbb{P}(x\leq z-y)g(y)f(y)dy$,
-	      density of $X+Y$ is $h(z)=\int f(z-y)g(y)dy$.
+\item 在$[0,1]$的均匀分布下取$n$个值, 最大值的期望是$\frac{n}{n+1}$, 最大值的密度
+	$f_X(x) = n(1-x)^{n-1}$.
 
-	\item 顺序统计量 $k$th order statistic: the $k$th smallest value in a sample of $n$ from a random distribution.
-	      There is $\mathbb{P}(X_{(k)}\leq x)=\sum_{j=k}^n F(x)^j (1-F(x))^{n-j}$.
+\item Distribution of $X+Y$ when $X\sim f,Y\sim g$ are independent:
+	$\mathbb{P} (X+Y\leq z)=\int\mathbb{P}(x\leq z-y)g(y)f(y)dy$,
+	density of $X+Y$ is $h(z)=\int f(z-y)g(y)dy$.
+
+\item 顺序统计量 $k$th order statistic: the $k$th smallest value in a sample of $n$ from a random distribution.
+	There is $\mathbb{P}(X_{(k)}\leq x)=\sum_{j=k}^n F(x)^j (1-F(x))^{n-j}$.
 
 \end{itemize}
 
@@ -165,6 +168,8 @@ Ito过程: 由$dX(t)=\Delta(X(t),t)dW(t)+\Theta(X(t),t)dt$形式SDE决定的随�
 Ito Lemma: 对Ito过程$X_t$, 有
 $df(t,X_t) = f_t(t,X_t)dt + f_x(t,X_t)dX_t+\frac{1}{2}f_{xx}(t,X_t)dX_tdX_t$.
 特别地, $df(W(t)) = f'(W_t)dW_t + \frac{1}{2}f''(W_t)dt$.
+
+\textbf{风险中性定价}
 
 Stock Price $S_t$ following log-normal Brownian motion:
 $dS_t = \alpha S_t dt + \sigma S_t dW_t$,
@@ -676,6 +681,11 @@ $\int \frac{1}{\left((x-a)^{2}+b^{2}\right)^{k}} \mathrm{d} x \stackrel{t=\frac{
 \frac{1}{b^{2 k-1}} \int \frac{1}{\left(t^{2}+1\right)^{k}} \mathrm{d} t$, \\
 $\int \frac{1}{\left(x^{2}+1\right)^{2}} \mathrm{~d} x=\frac{\arctan(x)}{2}+\frac{x}{2+2x^2}+C$\\
 
+\noindent \textbf{级数}\\
+$S(x)=\sum_{k=0}^{\infty} a_k (x-a)^k$ 收敛域 $R = 1/ \limsup_{k\to\infty} |a_k|^{1/k}$. \\
+$f(x)$ 任意阶可导, Taylor展开 $T(x)=\sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!} (x-a)^k$ 收敛域
+$R = \frac1e \liminf_{k\to\infty} \frac{k}{|f^{(k)}(a)|^{1/k}}$.
+
 \noindent Stirling公式. $n!\sim \sqrt[]{2\pi n}\left(\frac{n}{e}\right)^n (n\to\infty )$\\
 Viete公式. $\prod_{n=1}^{\infty} \cos (\frac{x}{2^n})=\frac{\sin x}{x} $\\
 Wallis公式. $\prod_{n=1}^{\infty} (1-\frac{1}{(2n)^2})=\frac{2}{\pi } $\\
@@ -693,7 +703,11 @@ $J(f)=\left(\frac{\partial f_i}{\partial x_j}\right)_{m\times n}$
 
 Prop. $H(f(x))=J(\nabla f(x))^T$.
 
-Hessian矩阵正定的极值点是极小值点, 负定是极大值点.
+Hessian 矩阵正定的极值点是极小值点, 负定是极大值点.
+
+多元函数 $f:\mathbb{R}^n\to\mathbb{R}$ 二阶 Taylor 展开:
+$f(x) = f(a) + Df(a) (x-a) + \frac12 (x-a)^T D^2f(a) (x-a)$,
+其中$D$为求梯度, $D^2$为 Hessian 矩阵.
 
 隐函数存在定理:
 对多元函数$F(x_1,\dots,x_n,y)=0$, 在周围闭矩形连续且有连续偏导, $F_y\neq 0$, 有$\frac{\partial y}{\partial x_i}=-\frac{F_{x_i}}{F_y}$.
@@ -703,25 +717,23 @@ Hessian矩阵正定的极值点是极小值点, 负定是极大值点.
 
 \noindent \textbf{重积分}
 
-重积分变量代换. 映射$T:
-	\left\{\begin{matrix}
-		x=x(u,v) \\y=y(u,v)
-	\end{matrix}\right.,D\to T(D)$
+重积分变量代换. 映射
+$T: \left\{\begin{matrix} x=x(u,v) \\y=y(u,v) \end{matrix}\right., D\to T(D)$
 有连续偏导且$\frac{\partial(x,y)}{\partial(u,v)}\neq 0$.
 $f(x,y)$在$T(D)$连续, 则
 $\iint_{T(D)}f(x,y)\mathrm{d}x\mathrm{d}y=\iint_{D} f(x(u,v), y(u,v))
-	\left|\frac{\partial(x,y)}{\partial(u,v)}\right| \mathrm{d}u\mathrm{d}v$
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right| \mathrm{d}u\mathrm{d}v$
 
 
 \noindent 常用变量代换:\par
-极坐标变换$x=r\cos\theta,y=r\sin\theta$下$\mathrm{d}x\mathrm{d}y=r\mathrm{d}r\mathrm{d}\theta$.\par
-柱坐标变换$x=r\cos\theta,y=r\sin\theta,z=z$下$\mathrm{d}x\mathrm{d}y\mathrm{d}z=r\mathrm{d}r\mathrm{d}\theta\mathrm{d}z$.\par
-球坐标变换$x=r\sin\varphi\cos\theta,y=r\sin\varphi\sin\theta,z=r\cos\varphi,
+极坐标变换 $x=r\cos\theta,y=r\sin\theta$下$\mathrm{d}x\mathrm{d}y=r\mathrm{d}r\mathrm{d}\theta$.\par
+柱坐标变换 $x=r\cos\theta,y=r\sin\theta,z=z$下$\mathrm{d}x\mathrm{d}y\mathrm{d}z=r\mathrm{d}r\mathrm{d}\theta\mathrm{d}z$.\par
+球坐标变换 $x=r\sin\varphi\cos\theta,y=r\sin\varphi\sin\theta,z=r\cos\varphi,
 	r\in[0,+\infty),\varphi\in[0,\pi],\theta\in[0,2\pi]$下$\mathrm{d}x\mathrm{d}y\mathrm{d}z
 	=r^2\sin\varphi \mathrm{d}r\mathrm{d}\varphi \mathrm{d}\theta$.\par
-广义球坐标变换$x=ar\sin\varphi\cos\theta,y=br\sin\varphi\sin\theta,z=cr\cos\varphi$下$\mathrm{d}x\mathrm{d}y\mathrm{d}z
+广义球坐标变换 $x=ar\sin\varphi\cos\theta,y=br\sin\varphi\sin\theta,z=cr\cos\varphi$下$\mathrm{d}x\mathrm{d}y\mathrm{d}z
 	=abcr^2\sin\varphi \mathrm{d}r\mathrm{d}\varphi \mathrm{d}\theta$.\par
-n重球坐标变换$x_{1}=r \cos \varphi_{1}, x_{2}=r \sin \varphi_{1} \cos \varphi_{2}, \cdots,
+$n$ 重球坐标变换 $x_{1}=r \cos \varphi_{1}, x_{2}=r \sin \varphi_{1} \cos \varphi_{2}, \cdots,
 	x_{n-1}=r \sin \varphi_{1}\cdots \sin \varphi_{n-2} \cos \varphi_{n-1},
 	x_{n}=r \sin \varphi_{1}\cdots\sin \varphi_{n-1},
 	0\leq \varphi_1,\cdots,\varphi_{n-2}\leq \pi,0\leq \varphi_{n-1}\leq 2\pi$下$
