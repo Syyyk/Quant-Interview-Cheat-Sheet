@@ -39,13 +39,25 @@ For vec-valued rv $\mathbf{X}$, $M_X(\mathbf{t})=\mathbb{E}[e^{\langle \mathbf{t
 特征函数 Ch.f.: For rv $X$, $\varphi_X(t)=\mathbb{E} [\exp(itX)]$.
 For vec-valued rv $\mathbf{X}$, $\varphi_X(\mathbf{t})=\mathbb{E}[e^{i \langle \mathbf{t},\mathbf{X} \rangle }]$.
 
-\noindent \textbf{一些分布} \par 
-Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. 期望$np$, Var $np(1-p)$. \par 
-Poisson$(\lambda)$: $P_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. 期望$\lambda$, Var $\lambda$.\par 
-Normal$(\mu, \sigma^2)$: $f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$. 
-偏度为0, 峰度为3. MGF: $\exp (\frac12 u^2 t)$.\par 
-Exponential$(\lambda)$: $f_X(x) = \lambda e^{-\lambda x}(x\geq 0)$. 期望$\frac{1}{\lambda}$, Var $\frac{1}{\lambda^2}$.
+偏度 Skewness $\gamma_1 = \mathbb{E}[(X-\mathbb{E}X)^3] / \operatorname{Var}(X)^{3/2}$.
+峰度 Kurtosis $\gamma_2 = \mathbb{E}[(X-\mathbb{E}X)^4] / \operatorname{Var}(X)^{2}$.
 
+\noindent \textbf{一些分布}
+\begin{itemize}
+\item Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. 期望$np$, Var $np(1-p)$.
+\item Poisson$(\lambda)$: $P_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. 期望$\lambda$, Var $\lambda$.
+\item Normal$(\mu, \sigma^2)$: $f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$. 
+	偏度为0, 峰度为3. MGF: $\exp (\frac12 u^2 t)$.
+\item Exponential$(\lambda)$: $f_X(x) = \lambda e^{-\lambda x}(x\geq 0)$. 期望$\frac{1}{\lambda}$, Var $\frac{1}{\lambda^2}$.
+\item $\Gamma(\alpha, \beta)$: $f_X(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$.
+	均值 $\frac{\alpha}{\beta}$, 方差 $\frac{\alpha}{\beta^2}$. MGF: $(\frac{\beta}{\beta -t})^{\alpha}$.
+	独立的 $X_i\sim \Gamma(\alpha_i,\beta)$ 有 $\sum  X_i \sim \Gamma(\sum \alpha_i, \beta)$.
+\item $\chi_n^2$ 自由度$n$的卡方分布为 $\sum_{i=1}^n X_i^2$ 其中 $X_i$ 是独立标准正态. 是特殊的Gamma分布 $\Gamma(\frac{n}{2}, \frac12)$.
+\item Fisher $F$ 分布 $F_{k.m} = \frac{X/k}{Y/m}$ 其中$X\sim\chi_k^2, Y\sim\chi_m^2$ 为独立卡方分布.
+\item Student $t$ 分布 $T = \frac{X}{\sqrt{\frac{1}{n}\sum_{i=1}^n Y_i^2}}$ 其中 $X, Y_i$ 为独立标准正态分布.
+	对称分布, 形状类似正态, 但tail更肥. pdf有 $f_T(t)=tf_{1,n}(t^2)$ 其中 $f_{1,n}$ 为$F_{1,n}$ 的pdf.
+
+\end{itemize}
 
 \noindent \textbf{Multivariate Gaussian} $\mathcal{N}(\mu,\Sigma)$
 
@@ -95,12 +107,13 @@ where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$. \\
 	则$X_1+X_2\sim X_1\sim \mathcal{N}(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2), $
 
 \item $X\sim \mathcal{N}(\mu,\sigma^2)$,
-	则$\mathbb{E}[|X|]=\mu\left[2 \Phi\left(\frac{\mu}{\sigma}\right)-1\right]+
+	则$\mathbb{E}|X|=\mu\left[2 \Phi\left(\frac{\mu}{\sigma}\right)-1\right]+
 		\frac{2 \sigma}{\sqrt{2 \pi}} \exp \left\{-\frac{\mu^{2}}{2 \sigma^{2}}\right\}$.
 	其中$\Phi$为std norm CDF.
 
-\item 在$[0,1]$的均匀分布下取$n$个值, 最大值的期望是$\frac{n}{n+1}$, 最大值的密度
-	$f_X(x) = n(1-x)^{n-1}$.
+\item 在 $[0,1]$ 的均匀分布下取 $n$ 个值, 最大值的期望是 $\frac{n}{n+1}$,
+最大值的密度 $f_X(x) = n(1-x)^{n-1}$.
+第 $i$ 大的值期望是 $\frac{i}{n+1}$.
 
 \item Distribution of $X+Y$ when $X\sim f,Y\sim g$ are independent:
 	$\mathbb{P} (X+Y\leq z)=\int\mathbb{P}(x\leq z-y)g(y)f(y)dy$,
@@ -109,20 +122,23 @@ where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$. \\
 \item 顺序统计量 $k$th order statistic: the $k$th smallest value in a sample of $n$ from a random distribution.
 	There is $\mathbb{P}(X_{(k)}\leq x)=\sum_{j=k}^n F(x)^j (1-F(x))^{n-j}$.
 
+\item 大数定律:
+	$X_1,\dots,X_n$ 是 iid rv 序列, 期望$\mu$有限.
+	令 $S_n = X_1+\dots+X_n$, 则
+	(弱) $\frac{S_n}{n}\to\mu$ in probability i.e.
+	$\lim_{n\to\infty}\mathbb{P}(|\frac{S_n}{n}-\mu|>\varepsilon)=0$.
+	(强) Almost surely $\lim_{n\to\infty}\frac{S_n}{n}=\mu$.
+
+\item 中心极限定理 Central Limit Theorem:
+	$X_1,\dots,X_n$ 是 iid rv 序列, 期望$\mu$和方差$\sigma^2$有限,
+	令 $S_n = X_1+\dots+X_n$, 则 $Y_n=\frac{S_n-\mu n}{\sigma\sqrt{n}}$
+	converges in distribution to std norm.
+
+\item 从$\mathcal{N}(\mu,\sigma^2)$ 抽样 $Y_1,...,Y_n$.
+	样本均值有 $\bar{Y}_n\sim\mathcal{N}(\mu,\frac{\sigma^2}{n})$.
+	样本方差 $s^2=\frac{1}{n-1}\sum(Y_i-\bar{Y}_n)^2$ 有 $(n-1)\frac{s^2}{\sigma^2} \sim \chi_{n-1}^2$.
+
 \end{itemize}
-
-大数定律:
-$X_1,\dots,X_n$ 是 iid rv 序列, 期望$\mu$有限.
-令 $S_n = X_1+\dots+X_n$, 则
-(弱) $\frac{S_n}{n}\to\mu$ in probability i.e.
-$\lim_{n\to\infty}\mathbb{P}(|\frac{S_n}{n}-\mu|>\varepsilon)=0$.
-(强) Almost surely $\lim_{n\to\infty}\frac{S_n}{n}=\mu$.
-
-中心极限定理 Central Limit Theorem:
-$X_1,\dots,X_n$ 是 iid rv 序列, 期望$\mu$和方差$\sigma^2$有限,
-令 $S_n = X_1+\dots+X_n$, 则 $Y_n=\frac{S_n-\mu n}{\sigma\sqrt{n}}$
-converges in distribution to std norm.
-
 
 \subsection{Stochastic Process}
 
