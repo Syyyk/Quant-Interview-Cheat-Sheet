@@ -89,7 +89,7 @@ $\mathbb{E}[X|\mathcal{F}]$是一个随机变量使得
 $\mathbb{E}[g(X)|Y]=h(Y)$ where
 $h(y) = \frac{\int g(x)f_{X,Y}(x,y)dx}{\int f_{X,Y}(x,y)dx}$.
 
-独立性引理. 若$X, Y$独立, 则$\mathbb{E}[\varphi(X,Y)|Y]=h(Y)$ where
+独立性引理. 若$X, Y$独立, 则 $\mathbb{E}[\varphi(X,Y)|Y]=h(Y)$ where
 $h(y)=\mathbb{E}[\varphi(X,y)]$.
 更一般地, $X_1,\dots,X_k$是$\mathcal{G}$可测的, $Y_1,\dots,Y_l$独立于$\mathcal{G}$,
 则$\mathbb{E}[f(X_1,\dots,X_k,Y_1,\dots,Y_l)|\mathcal{G}]=g(x_1,\dots,x_k)$
@@ -240,7 +240,10 @@ $\left\{\begin{array}{l}
 记$g(t,x)=\mathbb{E}^{t,x}[h(X(T))]$, 其中$X$是初值$X(t)=x$下的解.
 则$g_t+\beta g_x+\frac12 \gamma^2 g_{xx}=0$.
 
-\section{OLS}
+\section{Stats}
+
+\subsection{Regression}
+
 $y=X\beta+\varepsilon$, G-M假设 $\text{Cov}(\varepsilon)=\sigma ^2 I_n$.
 
 估计$\hat{\beta}=(X^TX)^{-1}X^Ty$.
@@ -260,7 +263,7 @@ $\mathbb{E}[e]=0, \operatorname{Var}(e)=\sigma^2 (I-H)$.
 $ESS = SSR = \sum (\hat{y_i}-\bar{y})^2, df=p-1$.
 $RSS = SSE = \sum (\hat{y_i}-y_i)^2, df=n-p$.
 $SST = \sum (y_i-\bar{y})^2$.
-有$SST=SSE+SSR$.定义$R^2=1-SSR/SST$.
+有$SST=SSE+SSR$.定义$R^2=SSR/SST$.
 (ESS: explained, SSE: error, SSR: regression, RSS: residual).
 
 $\operatorname{Var}(\hat{\beta_j}) = \frac{\sigma^2}{SST_j(1-R_j^2)}$,
@@ -281,6 +284,33 @@ t检验统计量$t_{\hat{\beta_j}} = \hat{\beta_j}/se(\hat{\beta_j})$.
 有$SE(\beta_j)=\frac{\sigma^2}{(n-1)\hat{Var}(X_j)}VIF_j$.
 
 $y$对$x$做一元回归, 回归系数$\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$. 回归$R^2$的分布$\sim Beta(\frac{k-1}{2},\frac{n-k}{2})$. $Beta(\alpha,\beta)$的期望为$\frac{1}{1+\beta/\alpha}$.
+
+\subsection{Hypothesis Testing}
+
+\noindent 检查正态分布的均值: t-test, $H_0: \mu=\mu_0$. \par
+统计量 $T = \sqrt{\frac{n-1}{\hat{\sigma^2}}}(\hat{\mu}-\mu_0)$, $H_0$下有$T\sim t_{n-1}$.
+如果$|T|>t_{\alpha/2,n-1}$, 则拒绝$H_0$.
+
+\noindent 检查正态分布的方差: $H_0: \sigma^2=\sigma_0^2$.\par 
+统计量 $Q = \frac{n \hat{\sigma^2}}{\sigma_0^2}$, $H_0$下有$Q\sim \chi^2_{n-1}$.
+如果$Q> \chi^2_{\alpha,n-1}$, 则拒绝$H_0$.
+
+\noindent 对两个正态分布$X, Y$的均值做假设检验: $H_0: \mu_X=\mu_Y$. \par 
+(1) 数据量相同, 直接检验$Z_i=X_i-Y_i$. \par 
+(2) $X$ 有 $n$ 个, $Y$ 有 $m$ 个.
+在$\sigma_X^2 = \sigma_Y^2$ 假设下, 
+统计量 $T = \frac{(\hat{\mu}_X-\hat{\mu}_Y)(\sqrt{m+n-2})}{\sqrt{\frac{1}{n}+\frac{1}{m}}\sqrt{n\hat{\sigma}_X^2+m\hat{\sigma}_Y^2}}$. \par 
+$H_0$下有$T\sim t_{n+m-2}$.
+如果$|T|>t_{\alpha/2,n+m-2}$, 则拒绝$H_0$.
+
+\noindent 对两个正态分布$X, Y$的方差做假设检验, F-test, $H_0: \sigma_X^2=\sigma_Y^2$. \par 
+统计量 $F = \frac{(m-1)n \hat{\sigma}_X^2}{(n-1)m \hat{\sigma}_Y^2}$,
+$H_0$下有$F\sim \frac{\sigma_X^2}{\sigma_Y^2}F_{n-1,m-1}$.
+
+\noindent OLS单个regressor系数的假设检验: $H_0: \beta_l=\beta_l^0$ 对某个$l$. \par
+记估计结果为$b$, 有$b_l-\beta_l \sim \mathcal{N}(0,\sigma^2((X^TX)^{-1})_{ll})$.
+统计量 $t_l = \frac{b_l-\beta_l^0}{\hat{s}((X^TX)^{-1})_{ll}^{1/2}}$ 其中 $s^2=\frac{e^Te}{n-k}$.
+在$H_0$下有$t_l\sim t_{n-k}$.
 
 
 \section{Finance}
