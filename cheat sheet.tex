@@ -46,14 +46,17 @@ For vec-valued rv $\mathbf{X}$, $\varphi_X(\mathbf{t})=\mathbb{E}[e^{i \langle \
 \begin{itemize}
 \item Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. 期望$np$, Var $np(1-p)$.
 \item Poisson$(\lambda)$: $P_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. 期望$\lambda$, Var $\lambda$.
+	当$\lambda >20$, 分布$\approx\mathcal{N}(\lambda, \lambda)$.
 \item Normal$(\mu, \sigma^2)$: $f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$. 
 	偏度为0, 峰度为3. MGF: $\exp (\frac12 u^2 t)$.
 \item Exponential$(\lambda)$: $f_X(x) = \lambda e^{-\lambda x}(x\geq 0)$. 期望$\frac{1}{\lambda}$, Var $\frac{1}{\lambda^2}$.
 \item $\Gamma(\alpha, \beta)$: $f_X(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$.
 	均值 $\frac{\alpha}{\beta}$, 方差 $\frac{\alpha}{\beta^2}$. MGF: $(\frac{\beta}{\beta -t})^{\alpha}$.
 	独立的 $X_i\sim \Gamma(\alpha_i,\beta)$ 有 $\sum  X_i \sim \Gamma(\sum \alpha_i, \beta)$.
-\item $\chi_n^2$ 自由度$n$的卡方分布为 $\sum_{i=1}^n X_i^2$ 其中 $X_i$ 是独立标准正态. 是特殊的Gamma分布 $\Gamma(\frac{n}{2}, \frac12)$.
-\item Fisher $F$ 分布 $F_{k.m} = \frac{X/k}{Y/m}$ 其中$X\sim\chi_k^2, Y\sim\chi_m^2$ 为独立卡方分布.
+\item $\chi_n^2$ 自由度$n$的卡方分布为 $\sum_{i=1}^n X_i^2$ 其中 $X_i$ 是独立标准正态. 是特殊的Gamma分布 $\Gamma(\frac{n}{2}, \frac12)$. 
+	均值等于自由度$n$, 方差为$2n$.
+\item Fisher $F$ 分布 $F_{k,m} = \frac{X/k}{Y/m}$ 其中$X\sim\chi_k^2, Y\sim\chi_m^2$ 为独立卡方分布.
+	期望为$\frac{m}{m-2}$对$m>2$, 期望发散对$m<=2$.
 \item Student $t$ 分布 $T = \frac{X}{\sqrt{\frac{1}{n}\sum_{i=1}^n Y_i^2}}$ 其中 $X, Y_i$ 为独立标准正态分布.
 	对称分布, 形状类似正态, 但tail更肥. pdf有 $f_T(t)=tf_{1,n}(t^2)$ 其中 $f_{1,n}$ 为$F_{1,n}$ 的pdf.
 
@@ -104,20 +107,25 @@ where $g(x_1,\dots,x_k)=\mathbb{E}[f(x_1,\dots,x_k,Y_1,\dots,Y_l)]$. \\
 \item $X$有pdf $f_X$, $Y=g(X)$其中$g$可微且严格单调, 则$f_Y(y)=f_X(g^{-1}(y))\frac{d}{dy}g^{-1}(y)$.
 
 \item $X_1\sim \mathcal{N}(\mu_1,\sigma_1^2), X_2\sim \mathcal{N}(\mu_2,\sigma_2^2)$ 独立, 
-	则$X_1+X_2\sim X_1\sim \mathcal{N}(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2), $
+	则$X_1+X_2\sim \mathcal{N}(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2), $
 
 \item $X\sim \mathcal{N}(\mu,\sigma^2)$,
 	则$\mathbb{E}|X|=\mu\left[2 \Phi\left(\frac{\mu}{\sigma}\right)-1\right]+
 		\frac{2 \sigma}{\sqrt{2 \pi}} \exp \left\{-\frac{\mu^{2}}{2 \sigma^{2}}\right\}$.
 	其中$\Phi$为std norm CDF.
 
+\item $X\sim\mathcal{N}(\mu_X,\sigma_X^2)$, $Y\sim\mathcal{N}(\mu_Y,\sigma_Y^2)$, corr $\rho$,
+	则 $X|Y \sim \mathcal{N}\left(\mu_X+\rho\frac{\sigma_X}{\sigma_Y}(Y-\mu_Y),(1-\rho^2)\sigma_X^2\right)$.
+
+\item 对于 std norm $X,Y$ corr $\rho$, 有 quadrant prob formula $P(X>0, Y>0) = \frac{1}{4}+\frac{1}{2\pi}\arcsin(\rho)$.
+
 \item 在 $[0,1]$ 的均匀分布下取 $n$ 个值, 最大值的期望是 $\frac{n}{n+1}$,
 最大值的密度 $f_X(x) = n(1-x)^{n-1}$.
 第 $i$ 大的值期望是 $\frac{i}{n+1}$.
 
-\item Distribution of $X+Y$ when $X\sim f,Y\sim g$ are independent:
-	$\mathbb{P} (X+Y\leq z)=\int\mathbb{P}(x\leq z-y)g(y)f(y)dy$,
-	density of $X+Y$ is $h(z)=\int f(z-y)g(y)dy$.
+\item 当 $X\sim f,Y\sim g$ 独立, $X+Y$ 有
+	$\mathbb{P} (X+Y\leq z)=\int\mathbb{P}(x\leq z-y)g(y)dy$,
+	pdf 为 $h(z)=\int f(z-y)g(y)dy$.
 
 \item 顺序统计量 $k$th order statistic: the $k$th smallest value in a sample of $n$ from a random distribution.
 	There is $\mathbb{P}(X_{(k)}\leq x)=\sum_{j=k}^n F(x)^j (1-F(x))^{n-j}$.
@@ -283,7 +291,8 @@ t检验统计量$t_{\hat{\beta_j}} = \hat{\beta_j}/se(\hat{\beta_j})$.
 衡量多重共线性$VIF_j = \frac{1}{1-R_j^2}$, 大于10认为严重.
 有$SE(\beta_j)=\frac{\sigma^2}{(n-1)\hat{Var}(X_j)}VIF_j$.
 
-$y$对$x$做一元回归, 回归系数$\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$. 回归$R^2$的分布$\sim Beta(\frac{k-1}{2},\frac{n-k}{2})$. $Beta(\alpha,\beta)$的期望为$\frac{1}{1+\beta/\alpha}$.
+$y$对$x$做一元回归, 回归系数(无截距) $\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$.
+回归$R^2$的分布$\sim Beta(\frac{k-1}{2},\frac{n-k}{2})$. $Beta(\alpha,\beta)$的期望为$\frac{1}{1+\beta/\alpha}$.
 
 \subsection{Hypothesis Testing}
 
