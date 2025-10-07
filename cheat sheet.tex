@@ -44,7 +44,8 @@ For vec-valued rv $\mathbf{X}$, $\varphi_X(\mathbf{t})=\mathbb{E}[e^{i \langle \
 
 \noindent \textbf{一些分布}
 \begin{itemize}
-\item Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. 期望$np$, Var $np(1-p)$.
+\item Binomial$(p, n)$: $P_X(k)=C_n^k p^k (1-p)^{n-k}$. $n$次尝试的成功次数. 期望$np$, Var $np(1-p)$.
+\item Geometric$(p)$: $P_X(k)=(1-p)^{k-1}p$. 第一次成功需要的尝试次数. 期望$\frac{1}{p}$, Var $\frac{1-p}{p^2}$.
 \item Poisson$(\lambda)$: $P_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. 期望$\lambda$, Var $\lambda$.
 	当$\lambda >20$, 分布$\approx\mathcal{N}(\lambda, \lambda)$.
 \item Normal$(\mu, \sigma^2)$: $f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$. 
@@ -71,7 +72,8 @@ $n$个正态分布拼起来不一定是Gaussian vec, 但$n$个独立正态分布
 
 给定vec $\mu$和半正定对称阵$\Sigma$, 存在Gaussian Vector $X$ with mean $\mu$ and Cov $\Sigma$.
 如果$\Sigma$是满秩的, 则存在density
-$f(\mathbf{x}) = (2 \pi)^{-d / 2} \operatorname{det}(\boldsymbol{\Sigma})^{-1 / 2} \exp \left(-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{\mathrm{T}} \boldsymbol{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right)$,
+$f(\mathbf{x}) = (2 \pi)^{-d / 2} \operatorname{det}(\boldsymbol{\Sigma})^{-1 / 2} 
+\exp \left(-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{\mathrm{T}} \boldsymbol{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right)$,
 
 MGF  $\exp \left( \mu^T t + \frac{1}{2} t^T \Sigma t \right)$.
 ChF $\exp \left( i \mu^T t - \frac{1}{2} t^T \Sigma t \right)$.
@@ -163,15 +165,27 @@ Rk. 一致可积u.i.即$\forall \varepsilon, \exists K$ s.t. $\mathbb{E}[|X_n|1_
 
 
 \noindent \textbf{Brownian Motion 性质} \par
-Scaling invariance: $\frac{1}{a} B(a^2t)$是BM. 可得first passage time $T_a=a^2 T_1$ in distr. \par
-Time inversion: $X(t)=tB(\frac{1}{t})(t>0),X(0)=0$是BM. 可得 $\lim_{t\to\infty}\frac{B(t)}{t}=0$ a.s. \par
-Reflection Principle: $T$是停时, $B_t1_{t\leq T}+(2B_T-B_t)1_{t>T}$是BM. \par
-$B(t), B(t)^2-t$是鞅. 指数鞅 $X(t)=\exp(\lambda B(t)-\frac12 \lambda^2 t)$对$\lambda\in\mathbb{R}$. \par
-Arcsine law: $L=\sup \{t\in[0,1]:B(t)=0\}$ is distributed as $\mathbb{P}(L\leq x)=\frac{2}{\pi}\arcsin\sqrt{x}$. \par
-Wald's Lemma: 停时$T$有$\mathbb{E}T <\infty$, 则$\mathbb{E}[B(T)]=0$, $\mathbb{E}[B(T)^2]=\mathbb{E}T$. \par
-Law of the Iterated Logarithm: $\limsup _{t \rightarrow \infty} \frac{B(t)}{\sqrt{2 t \log \log (t)}}=1$ a.s. \par
+\begin{itemize}
+\item Scaling invariance: $\frac{1}{a} B(a^2t)$是BM. 可得first passage time $T_a=a^2 T_1$ in distr.
 
+\item Time inversion: $X(t)=tB(\frac{1}{t})(t>0),X(0)=0$是BM. 可得 $\lim_{t\to\infty}\frac{B(t)}{t}=0$ a.s.
 
+\item Reflection Principle: $T$是停时, $B_t1_{t\leq T}+(2B_T-B_t)1_{t>T}$是BM.
+
+\item 考虑停时$\tau = \min\{t>0: B(t)=-a \text{ or } B(t)=b\}$. 有$\mathbb{E}[\tau]=ab$, 
+	$\operatorname{Var}(\tau)=\frac{ab(a^2+b^2)}{3}$.
+
+\item 指数鞅 $M_t(\lambda)=\exp(\lambda B(t)-\frac12 \lambda^2 t)$对$\lambda\in\mathbb{R}$. 
+	可以由指数鞅生成鞅 $H_n(B_t,t)=\frac{\partial^n}{\partial\lambda^n}M_t(\lambda)\mid_{\lambda=0}$,
+	如$H_1=B_t, H_2=B_t^2-t, H_3=B_t^3-3tB_t, H_4=B_t^4-6tB_t^2+3t^2$.
+
+\item Arcsine law: $L=\sup \{t\in[0,1]:B(t)=0\}$ is distributed as $\mathbb{P}(L\leq x)=\frac{2}{\pi}\arcsin\sqrt{x}$.
+
+\item Wald's Lemma: 停时$T$有$\mathbb{E}T <\infty$, 则$\mathbb{E}[B(T)]=0$, $\mathbb{E}[B(T)^2]=\mathbb{E}T$.
+
+\item Law of the Iterated Logarithm: $\limsup _{t \rightarrow \infty} \frac{B(t)}{\sqrt{2 t \log \log (t)}}=1$ a.s.
+
+\end{itemize}
 
 \noindent \textbf{Stochastic Calculus}
 
@@ -193,7 +207,7 @@ Ito Lemma: 对Ito过程$X_t$, 有
 $df(t,X_t) = f_t(t,X_t)dt + f_x(t,X_t)dX_t+\frac{1}{2}f_{xx}(t,X_t)dX_tdX_t$.
 特别地, $df(W(t)) = f'(W_t)dW_t + \frac{1}{2}f''(W_t)dt$.
 
-\textbf{风险中性定价}
+\noindent \textbf{风险中性定价}
 
 Stock Price $S_t$ following log-normal Brownian motion:
 $dS_t = \alpha S_t dt + \sigma S_t dW_t$,
@@ -203,9 +217,10 @@ Girsanov Thm.
 定义$Z(t)=\exp\left(-\int_0^t \Theta(u)dW(u)-\frac12 \int_0^t \Theta(u)^2 d\right)$,
 $\widetilde{W}(t)=W(t)+\int_0^t\Theta(u)du$,
 并假设$\Theta(u)Z(u)$平方可积.
-令$Z=Z(T)$, 则$\mathbb{E}Z=1$,
-且$Z$作为Radon-Nikodym导数, 即$\widetilde{\mathbb{P}}(A)=\int_A Z(\omega)d\mathbb{P}(\omega)$定义的
-$\widetilde{\mathbb{P}}$下, $\widetilde{W}(t)$是BM.
+令 $Z=Z(T)$, 则 $\mathbb{E}Z=1$,
+且$\widetilde{W}(t)$是$\widetilde{\mathbb{P}}$下的BM, 其中
+$\widetilde{\mathbb{P}}$ 是 $Z$ 作为 Radon-Nikodym 导数得到的测度,
+即 $\widetilde{\mathbb{P}}(A)=\int_A Z(\omega)d\mathbb{P}(\omega)$.
 
 在$\Theta(t)=\frac{\alpha(t)-R(t)}{\sigma(t)}$定义的$\widetilde{\mathbb{P}},\widetilde{W}$下,
 $dS(t)=R(t)S(t)dt+\sigma(t)S(t)d\widetilde{W}(t)$, 贴现后
@@ -252,24 +267,34 @@ $\left\{\begin{array}{l}
 
 \subsection{Regression}
 
-$y=X\beta+\varepsilon$, G-M假设 $\text{Cov}(\varepsilon)=\sigma ^2 I_n$.
+假设: (1) $y=X\beta+\varepsilon$ (2) 随机抽样 (3) 无完全共线性
+(4) 严格外生性 $\mathbb{E}[\varepsilon|X]=0$ 
+(5) 球形扰动/Homoskedasticity $\operatorname{Var}(\varepsilon|X)=\sigma^2 I_n$
+(6) 正态性 $\varepsilon|X\sim\mathcal{N}(0,\sigma^2 I_n)$.
 
 估计$\hat{\beta}=(X^TX)^{-1}X^Ty$.
-满足$\mathbb{E}[\hat{\beta}]=\beta, \operatorname{Var}(\hat{\beta})=\sigma^2(X^TX)^{-1}$.
-是正态分布.
-是BLUE最佳线性无偏估计.
+(1)-(4) 时 $\hat{\beta}$ 是无偏的,
+(1)-(5) 时是 BLUE 最佳线性无偏估计, (1)-(6) 时 $\hat{\beta}$ 是最优估计量.
+
+如果异方差(对角线不相等)/自相关(非对角不为0), 违反(5), 估计不再是最佳的(用广义最小二乘GLS变量转换),
+并且假设检验失效(用稳健标准误).
+
+估计的分布是正态, $\mathbb{E}[\hat{\beta}]=\beta, \operatorname{Var}(\hat{\beta})=\sigma^2(X^TX)^{-1}$.
+
 
 $X$已知非随机, $y$已知随机, $\beta$未知非随机, $\hat{\beta}$随机, $\varepsilon$未知随机($\sigma^2$ 未知).
 每个$y_i$都有一个对应的总体$N(\beta^T x_i, \sigma^2)$
 
-记$H=X(X^TX)^{-1}X^T$,有$\hat{y}=Hy$. $H$对称幂等,$HX=X$,迹为$k+1$.
+Notation: 解释变量的个数为$k$不包括截距, 回归参数总数$p$包含截距$=k+1$不包含截距$=k$.
+
+记$H=X(X^TX)^{-1}X^T$,有$\hat{y}=Hy$. $H$对称幂等,$HX=X$, rank和trace均为$p$.
 
 $\mathbb{E}[\hat{y}]=y, \operatorname{Var}(\hat{y})=\sigma^2H$.
 残差$e=y-\hat{y}$(注意区别于误差向量$\varepsilon$)有
 $\mathbb{E}[e]=0, \operatorname{Var}(e)=\sigma^2 (I-H)$.
 
 $ESS = SSR = \sum (\hat{y_i}-\bar{y})^2, df=p-1$.
-$RSS = SSE = \sum (\hat{y_i}-y_i)^2, df=n-p$.
+$RSS = SSE = \sum (\hat{y_i}-y_i)^2$.
 $SST = \sum (y_i-\bar{y})^2$.
 有$SST=SSE+SSR$.定义$R^2=SSR/SST$.
 (ESS: explained, SSE: error, SSR: regression, RSS: residual).
@@ -278,7 +303,7 @@ $\operatorname{Var}(\hat{\beta_j}) = \frac{\sigma^2}{SST_j(1-R_j^2)}$,
 其中$SST_j=\sum_i (x_{ij}-\bar{x_j})^2$, $R_j^2$为$x_j$关于其他自变量含截距回归的$R^2$.
 
 MLE: $\hat{\sigma^2}=\frac{RSS}{n}$是有偏的,
-无偏估计为$\hat{\sigma^2}=\frac{RSS}{n-k-1}$(或写为$se^2$).
+无偏估计为$\hat{\sigma^2}=\frac{RSS}{n-p}$(或写为$se^2$). 残差自由度$df=n-p$.
 
 $\hat{\beta_j}$标准误(标准化残差)$se(\hat{\beta_j}) = \frac{\hat{\sigma}}{(SST_j(1-R_j^2))^{1/2}}$.
 $SE(\hat{\beta_j})$是$Cov(\hat{\beta})$对应对角元的开根.
@@ -291,8 +316,21 @@ t检验统计量$t_{\hat{\beta_j}} = \hat{\beta_j}/se(\hat{\beta_j})$.
 衡量多重共线性$VIF_j = \frac{1}{1-R_j^2}$, 大于10认为严重.
 有$SE(\beta_j)=\frac{\sigma^2}{(n-1)\hat{Var}(X_j)}VIF_j$.
 
-$y$对$x$做一元回归, 回归系数(无截距) $\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$.
-回归$R^2$的分布$\sim Beta(\frac{k-1}{2},\frac{n-k}{2})$. $Beta(\alpha,\beta)$的期望为$\frac{1}{1+\beta/\alpha}$.
+$y$对$x$做一元回归, 回归系数(无截距) $\hat{\beta}_{yx}=\frac{\sum x_i y_i}{\sum x_i^2}$, 
+(有截距) $\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$.
+
+有截距的一元回归$y\sim(1,x)$有$R^2=r^2$.
+如果$y\sim(1,x1)$ 得到 $r_1^2$, $y\sim(1,x2)$ 得到 $r_2^2$, 且 $x1, x2$ 的相关系数是 $\rho$,
+则 $y\sim(1,x1,x2)$ 的 $R^2 = \frac{r_1^2 + r_2^2 - 2r_1r_2\rho}{1-\rho^2}$.
+
+对于$k$个解释变量, 包含截距的回归$R^2$的分布$\sim Beta(\frac{k}{2},\frac{n-k-1}{2})$,
+其中 $Beta(\alpha,\beta)$ 的期望为$\frac{1}{1+\beta/\alpha}$.
+不含截距时没有Beta分布性质, 并且$R^2$可能为负.
+
+样本翻一倍: $\hat{\beta}$以及$R^2$不变, 
+在$\sigma^2$固定的情况下, $Var(\hat{\beta})$变为原来的$\frac{1}{2}$, 相应$t$变为$\sqrt{2}$倍, $F$变为2倍.
+但实际$\hat{\sigma}_{new}^2 = (1-\frac{p}{2n-p})\hat{\sigma}^2$, $t$变为$\sqrt{2+\frac{p}{n-p}}$倍,
+其中$n$为样本量, $p$ 为解释变量个数.
 
 \subsection{Hypothesis Testing}
 
