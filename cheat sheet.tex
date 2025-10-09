@@ -332,6 +332,12 @@ $y$对$x$做一元回归, 回归系数(无截距) $\hat{\beta}_{yx}=\frac{\sum x
 但实际$\hat{\sigma}_{new}^2 = (1-\frac{p}{2n-p})\hat{\sigma}^2$, $t$变为$\sqrt{2+\frac{p}{n-p}}$倍,
 其中$n$为样本量, $p$ 为解释变量个数.
 
+
+分块OLS: 将很大的数据$X$分成$X_1, X_2, \dots, X_M$块,
+对第$m$份计算$S_{xx}^{(m)}=X_m^TX_m$和$S_{xy}^{(m)}=X_m^Ty_m$.
+合并$S_{xx}=\sum_m S_{xx}^{(m)}, S_{xy}=\sum_m S_{xy}^{(m)}$.
+最后计算$\hat{\beta}=(S_{xx})^{-1}S_{xy}$. 这与直接对$X$计算OLS结果相同.
+
 \subsection{Hypothesis Testing}
 
 \noindent 检查正态分布的均值: t-test, $H_0: \mu=\mu_0$. \par
