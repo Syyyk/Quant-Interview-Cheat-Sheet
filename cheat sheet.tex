@@ -209,7 +209,7 @@ Ito Lemma: 对Ito过程$X_t$, 有
 $df(t,X_t) = f_t(t,X_t)dt + f_x(t,X_t)dX_t+\frac{1}{2}f_{xx}(t,X_t)dX_tdX_t$.
 特别地, $df(W(t)) = f'(W_t)dW_t + \frac{1}{2}f''(W_t)dt$.
 
-\noindent \textbf{风险中性定价}
+\subsection{Risk-Neutral Pricing}
 
 Stock Price $S_t$ following log-normal Brownian motion:
 $dS_t = \alpha S_t dt + \sigma S_t dW_t$,
@@ -236,7 +236,6 @@ $M(t)=\mathbb{E}[M_0]+\int_0^t \theta(s) dW(s)$.
 $V^*(T)=\widetilde{\mathbb{E}}V_0 + \int_0^T \theta(t) d\widetilde{W}(t)$
 $=\widetilde{\mathbb{E}}V_0 + \int_0^T \frac{\theta(t)}{\sigma(t)S^*(t)} dS^*(t)$,
 即为复制策略.
-
 
 \subsection{Stochastic Differential Equation}
 
@@ -342,6 +341,11 @@ $y$对$x$做一元回归, 回归系数(无截距) $\hat{\beta}_{yx}=\frac{\sum x
 最后计算$\hat{\beta}=(S_{xx})^{-1}S_{xy}$. 这与直接对$X$计算OLS结果相同.
 
 \subsection{Hypothesis Testing}
+
+Confidence Interval: $95\%$ 置信区间指
+在同样模型假设下做重复抽样无数次, 有 $95\%$ 的概率包含真实参数值的区间.
+即 $\mathbb{P}(\hat{\theta}_{lower}(X) < \theta_{true} < \hat{\theta}_{upper}(X)) = 0.95$,
+这里 $X$ 是随机的, 而不是$\theta_{true}$.
 
 \noindent 检查正态分布的均值: t-test, $H_0: \mu=\mu_0$. \par
 统计量 $T = \sqrt{\frac{n-1}{\hat{\sigma^2}}}(\hat{\mu}-\mu_0)$, $H_0$下有$T\sim t_{n-1}$.
