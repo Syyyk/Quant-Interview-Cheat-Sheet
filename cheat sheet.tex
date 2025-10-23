@@ -321,8 +321,20 @@ T化残差为原始残差除以估计的标准差.
 t检验统计量$t_{\hat{\beta_j}} = \hat{\beta_j}/se(\hat{\beta_j})$.
 整体回归F统计量$F=\frac{R^2/k}{(1-R^2)/(n-k-1)}$.
 
-衡量多重共线性$VIF_j = \frac{1}{1-R_j^2}$, 大于10认为严重.
-有$SE(\beta_j)=\frac{\sigma^2}{(n-1)\hat{Var}(X_j)}VIF_j$.
+多重共线性会导致 $X^TX$ 某些特征值非常小,
+求逆后方差膨胀(放大样本噪声), 系数不稳定, t检验失效.
+衡量多重共线性 $VIF_j = \frac{1}{1-R_j^2}$, 大于10认为严重.
+系数有 $SE(\beta_j) = \frac{\sigma^2 VIF_j}{(n-1)\hat{Var}(X_j)}$.
+解决方法: 删除列, 做PCA, 使用Ridge/Lasso.
+
+Ridge回归目标函数$\min_{\beta} \|y-X\beta \|^2 + \lambda \|\beta\|_2^2$,
+通过惩罚项约束系数的大小.
+有闭式解 $\hat{\beta} = (X^TX+\lambda I)^{-1}X^Ty$.
+惩罚项避免了特征值接近0时求逆的不稳定.
+Lasso惩罚项是$L^1$的, 有变量选择的效果.
+L1约束的菱形角点容易与最小二乘等高线相交于坐标轴上, 因此Lasso倾向于让部分系数精确为零.
+
+
 
 $y$对$x$做一元回归, 回归系数(无截距) $\hat{\beta}_{yx}=\frac{\sum x_i y_i}{\sum x_i^2}$, 
 (有截距) $\hat{\beta}_{yx}=\frac{Cov(x,y)}{Var(x)}$.
