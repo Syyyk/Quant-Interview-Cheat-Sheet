@@ -237,6 +237,12 @@ $V^*(T)=\widetilde{\mathbb{E}}V_0 + \int_0^T \theta(t) d\widetilde{W}(t)$
 $=\widetilde{\mathbb{E}}V_0 + \int_0^T \frac{\theta(t)}{\sigma(t)S^*(t)} dS^*(t)$,
 即为复制策略.
 
+Ornstein-Uhlenbeck (OU): 连续时间均值回归随机过程.
+SDE定义: $dX_t = \kappa (\theta - X_t) dt + \sigma dW_t$.
+显示定义: $X_t = \theta + (X_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa (t-s)} dW_s$. (因此不是鞅)
+分布定义: $X_t \mid X_0 \sim \mathcal{N}(\theta + (X_0 - \theta)e^{-\kappa t}, \frac{\sigma^2}{2\kappa}(1-e^{-2\kappa t}))$.
+应用: Vasicek, Heston Var.
+
 \subsection{Stochastic Differential Equation}
 
 \textbf{线性SDE求解}  考虑$\left\{\begin{array}{l}
